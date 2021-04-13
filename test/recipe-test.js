@@ -47,7 +47,7 @@ describe('Recipe', function() {
     expect(recipe.ingredients[0]).to.deep.eq(ingredient);
   });
 
-  it.only('should calculate the total cost of all of the ingredients', function() {
+  it('should calculate the total cost of all of the ingredients', function() {
     expect(recipe.calculateIngredientsCost(ingredientInfo)).to.eq(177.76);
   });
 
