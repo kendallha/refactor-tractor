@@ -129,3 +129,5 @@ let recipeData = [
     ]
   }
 ];
+
+export default recipeData; 
