@@ -21,14 +21,14 @@ describe('Ingredient', function() {
   });
 
   it('should be able to store an id', function() {
-    expect(ingredient[0].id).to.equal(20081);
+    expect(ingredient.id).to.equal(20081);
   });
 
   it('should be able to store the name of the ingredient', function() {
-    expect(ingredient[0].name).to.equal("wheat flour");
+    expect(ingredient.name).to.equal("wheat flour");
   });
 
   it('should be able to store the estimated cost in cents', function() {
-    expect(ingredient[0].estimatedCostInCents).to.equal(142);
+    expect(ingredient.estimatedCostInCents).to.equal(142);
   });
 })
