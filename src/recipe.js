@@ -5,11 +5,32 @@ class Recipe {
     this.image = recipe.image;
     this.tags = recipe.tags;
     this.ingredients = recipe.ingredients;
+    this.instructions = recipe.instructions
   }
-  calculateIngredientsCost() {
-    // return this.ingredients.map(i => {
-    //   ingredientData.find(ingredient => ingredient === i);
-    // });
+
+  calculateIngredientsCost(ingredientData) {
+    let cost = [];
+    this.ingredients.forEach(i => {
+      ingredientData.forEach(ingredient => {
+        if (i.id === ingredient.id) {
+          cost.push(ingredient.estimatedCostInCents * i.quantity.amount)
+        }
+      })
+    })
+    return cost.reduce((acc, cv) => {
+      acc += cv;
+      return acc;
+    }, 0) / 100;
+  }
+
+  findAllIngredientNames() {
+    return this.ingredients.map(ingredient => {
+      return ingredient.name;
+    })
+  };
+
+  returnRecipeInstructions() {
+    return this.instructions;
   }
 }
 
