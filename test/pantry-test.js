@@ -46,6 +46,6 @@ describe('Pantry', function() {
 
   it('should decrease ingredients if used in recipe', function() {
     pantry.useIngredientsCookMeal(recipe.recipes[1]);
-    expect(user.pantry[0].amount).to.deep.equal(0.5);
+    expect(pantry.pantryIngredients[0].amount).to.equal(0.5);
   })
 })

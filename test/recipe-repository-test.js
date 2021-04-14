@@ -36,7 +36,7 @@ describe('RecipeRepository', function() {
     expect(recipe.filterRecipesByTag(['snack', 'antipasto'])).to.deep.equal([recipe.recipes[0]]);
   })
 
-  it.only('should be able to filter recipes based on name', function() {
+  it('should be able to filter recipes based on name', function() {
     expect(recipe.filterRecipesByName("Pudding")).to.deep.equal([recipe.recipes[0]]);
   })
 })
