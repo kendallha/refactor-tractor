@@ -127,7 +127,22 @@ let recipeData = [
       "antipasto",
       "hor d'oeuvre"
     ]
+  },
+  {
+    "name": "Maple Dijon Apple Cider Grilled Pork Chops",
+    "id": 678353,
+    "image": "https://spoonacular.com/recipeImages/678353-556x370.jpg",
+    "ingredients": [
+      {
+        "name": "apple cider",
+        "id": 1009016,
+        "quantity": {
+          "amount": 1.5,
+          "unit": "cups"
+        }
+      },
+    ]
   }
 ];
 
-export default recipeData; 
+export default recipeData;

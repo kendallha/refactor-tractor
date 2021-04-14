@@ -21,6 +21,7 @@ describe('Pantry', function() {
     pantry = new Pantry(user.pantry);
 
     recipe = new RecipeRepository(recipeData);
+
   });
 
   it('should be a function', function() {
@@ -29,6 +30,10 @@ describe('Pantry', function() {
 
   it('should contain an array of ingredients', function() {
     expect(pantry.pantryIngredients).to.deep.eq([
+      {
+        "ingredient": 1009016,
+        "amount": 2
+      },
       {
         "ingredient": 11477,
         "amount": 1
@@ -112,5 +117,15 @@ describe('Pantry', function() {
     ])
   });
 
-  it('')
+  it('should be able to check if pantry has ingredients for recipe', function() {
+    expect(pantry.checkIngredientsMeal(recipe.recipes[1])).to.eq(true)
+  });
+
+  // it('should return an array of missing ingredients for recipe', function() {
+  //   expect(pantry.findMissingIngredientsMeal(recipe))to.deep.equal()
+  // });
+  //
+  // it('should decrease ingredients if used in recipe', function() {
+  //   expect(pantry.useIngredientsCookMeal(recipe)).to.deep.equal()
+  // })
 })

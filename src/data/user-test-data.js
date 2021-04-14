@@ -4,6 +4,10 @@ let users = [
     "name": "Saige O'Kon",
     "pantry": [
       {
+        "ingredient": 1009016,
+        "amount": 2
+      },
+      {
         "ingredient": 11477,
         "amount": 1
       },
@@ -87,4 +91,4 @@ let users = [
   }
 ];
 
-export default users; 
+export default users;
