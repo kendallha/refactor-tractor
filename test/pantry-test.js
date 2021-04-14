@@ -125,9 +125,9 @@ describe('Pantry', function() {
     expect(pantry.checkIngredientsMeal(recipe.recipes[0])).to.eq(false);
   });
 
-  // it('should return an array of missing ingredients for recipe', function() {
-  //   expect(pantry.findMissingIngredientsMeal(recipe))to.deep.equal()
-  // });
+  it.only('should return an array of missing ingredients for recipe', function() {
+    expect(pantry.findMissingIngredientsMeal(recipe.recipes[1])).to.deep.eq([{ingredient: "apple cider", amount: 0.5}])
+  });
   //
   // it('should decrease ingredients if used in recipe', function() {
   //   expect(pantry.useIngredientsCookMeal(recipe)).to.deep.equal()
