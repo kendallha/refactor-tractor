@@ -141,6 +141,13 @@ let recipeData = [
           "unit": "cups"
         }
       },
+    ],
+    "tags": [
+      "dinner",
+      "meal",
+      "snack",
+      "appetizer",
+      "hor d'oeuvre"
     ]
   }
 ];

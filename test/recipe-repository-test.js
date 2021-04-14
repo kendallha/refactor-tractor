@@ -25,16 +25,18 @@ describe('RecipeRepository', function() {
     expect(recipe.recipes[0]).to.be.an.instanceof(Recipe);
   });
 
-  it.only('should be able to filter recipes based on ingredients', function() {
+  it('should be able to filter recipes based on ingredients', function() {
     expect(recipe.filterRecipesByIngredient(['sriracha'])).to.deep.equal([]);
     expect(recipe.filterRecipesByIngredient(['baking soda'])).to.deep.equal([recipe.recipes[0]]);
   })
 
   it('should be able to filter recipes based on tag(s)', function() {
-    expect(recipe.filterRecipes()).to.deep.equal();
+    expect(recipe.filterRecipesByTag(['breakfast'])).to.deep.equal([]);
+    expect(recipe.filterRecipesByTag(['snack'])).to.deep.equal([recipe.recipes[0], recipe.recipes[1]]);
+    expect(recipe.filterRecipesByTag(['snack', 'antipasto'])).to.deep.equal([recipe.recipes[0]]);
   })
 
-  it('should be able to filter recipes based on name', function() {
-    expect(recipe.filterRecipes()).to.deep.equal();
+  it.only('should be able to filter recipes based on name', function() {
+    expect(recipe.filterRecipesByName("Pudding")).to.deep.equal([recipe.recipes[0]]);
   })
 })

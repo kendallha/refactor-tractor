@@ -6,7 +6,7 @@ class RecipeRepository {
   }
 
   filterRecipesByTag(values) {
-    return this.recipes.filter(recipe => values.every(value => recipe.tags.includes(value)));
+    return this.recipes.filter(recipe => values.every(value => recipe.tags.includes(value)))
    }
 
   filterRecipesByIngredient(values) {
