@@ -26,7 +26,17 @@ class Pantry {
 
 
   useIngredientsCookMeal(recipe) {
-
+    // array method (forEach) over our recipe amount for each ingredient
+    // For each ingredient amount; look in our pantry and subtract the amount needed for recipe from pantry amount
+    // console.log(recipe);
+    // let items = recipe.ingredients.forEach(ingredient => {
+    //   this.pantryIngredients.find(pantryItem => {
+    //    if (pantryItem.ingredient === ingredient.id) {
+    //      return pantryItem.amount - ingredient.quantity.amount
+    //     }
+    //   })
+    // });
+    // return this.pantryIngredients[0].amount;
   }
 }
 
