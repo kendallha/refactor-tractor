@@ -5,12 +5,13 @@ class RecipeRepository {
     this.recipes = recipeData.map(recipe => new Recipe(recipe));
   }
 
-  filterRecipes(quality, filterValues) {
-    // let recipeNames = this.recipes.map(recipe => recipe[quality]);
-    // return recipeNames.filter(name => {
-    //   filterValues.every(name)
-    // })
-  }
+  filterRecipesByTag(values) {
+    return this.recipes.filter(recipe => values.every(value => recipe.tags.includes(value)));
+   }
+
+  filterRecipesByIngredient(values) {
+    return this.recipes.filter(recipe => values.every(value => recipe.ingredients.some(ingredient => value === ingredient.name)));
+}
 
   filterRecipesByName(name) {
     return this.recipes.filter(recipe => recipe.name.includes(name));

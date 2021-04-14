@@ -25,8 +25,9 @@ describe('RecipeRepository', function() {
     expect(recipe.recipes[0]).to.be.an.instanceof(Recipe);
   });
 
-  it('should be able to filter recipes based on ingredients', function() {
-    expect(recipe.filterRecipes('ingredients', 'sriracha')).to.deep.equal();
+  it.only('should be able to filter recipes based on ingredients', function() {
+    expect(recipe.filterRecipesByIngredient(['sriracha'])).to.deep.equal([]);
+    expect(recipe.filterRecipesByIngredient(['baking soda'])).to.deep.equal([recipe.recipes[0]]);
   })
 
   it('should be able to filter recipes based on tag(s)', function() {
