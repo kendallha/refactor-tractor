@@ -117,8 +117,12 @@ describe('Pantry', function() {
     ])
   });
 
-  it('should be able to check if pantry has ingredients for recipe', function() {
-    expect(pantry.checkIngredientsMeal(recipe.recipes[1])).to.eq(true)
+  it('should return true if pantry has ingredients for recipe', function() {
+    expect(pantry.checkIngredientsMeal(recipe.recipes[1])).to.eq(true);
+  });
+
+  it('should return false if pantry does not have ingredients for recipe', function() {
+    expect(pantry.checkIngredientsMeal(recipe.recipes[0])).to.eq(false);
   });
 
   // it('should return an array of missing ingredients for recipe', function() {
