@@ -139,26 +139,39 @@ span {
   font-size: 0px;
   font-weight: 700;
   justify-content: center;
-  margin: 0%;
+  // margin: 0%;
   outline: none;
   overflow: hidden;
   text-align: center;
   transition: .4s ease;
   width: 15%;
+
+  &:hover {
+    color: $green-title-border;
+    font-size: 14px;
+    text-shadow: 0px 2px 4px black;
+    transition: .4s ease;
+  }
+
+  &img {
+    max-height: 40px;
+    max-width: 40px;
+    padding: 2px 0px;
+  }
 }
 
-.nav-btn:hover {
-  color: $green-title-border;
-  font-size: 14px;
-  text-shadow: 0px 2px 4px black;
-  transition: .4s ease;
-}
-
-.nav-btn img {
-  max-height: 40px;
-  max-width: 40px;
-  padding: 2px 0px;
-}
+// .nav-btn:hover {
+//   color: $green-title-border;
+//   font-size: 14px;
+//   text-shadow: 0px 2px 4px black;
+//   transition: .4s ease;
+// }
+//
+// .nav-btn img {
+//   max-height: 40px;
+//   max-width: 40px;
+//   padding: 2px 0px;
+// }
 
 .saved-ingredients-btn {
   border-left: 3px solid $green-title-border;
@@ -248,24 +261,41 @@ main {
   margin: 20px;
   padding: 15px;
   width: 250px;
-}
 
-.recipe-card:hover .card-photo-preview {
-  opacity: 50%;
-  transition: .8s ease;
-}
+  &:hover .card-photo-preview {
+    opacity: 50%;
+    transition: .8s ease;
+  }
 
-.recipe-card:hover .text {
-  font-size: 20px;
-  opacity: 100%;
-  transition: .5s ease;
-  width: 100%;
-}
+  &:hover .text {
+    font-size: 20px;
+    opacity: 100%;
+    transition: .5s ease;
+    width: 100%;
+  }
 
-.recipe-card:hover h3 {
-  text-shadow: 0px 0px 4px $green-title-border;
-  transition: .8s ease;
+  &:hover h3 {
+    text-shadow: 0px 0px 4px $green-title-border;
+    transition: .8s ease;
+  }
 }
+//
+// .recipe-card:hover .card-photo-preview {
+//   opacity: 50%;
+//   transition: .8s ease;
+// }
+//
+// .recipe-card:hover .text {
+//   font-size: 20px;
+//   opacity: 100%;
+//   transition: .5s ease;
+//   width: 100%;
+// }
+//
+// .recipe-card:hover h3 {
+//   text-shadow: 0px 0px 4px $green-title-border;
+//   transition: .8s ease;
+// }
 
 .card-apple-icon {
   cursor: pointer;
@@ -309,33 +339,41 @@ main {
 
 
 /* BUTTONS */
-.show-pantry-recipes-btn,
-.show-all-btn,
-.filter-btn {
-  background-color: $green-recipe-title;
-  border: 0;
-  border-radius: 3px;
-  color: white;
-  cursor: pointer;
-  font-family: $Quicksand;
-  font-size: 12pt;
-  font-weight: bold;
-  padding: 5px 10px 5px 10px;
-}
+// .show-pantry-recipes-btn,
+// .show-all-btn,
+// .filter-btn {
+//   background-color: $green-recipe-title;
+//   border: 0;
+//   border-radius: 3px;
+//   color: white;
+//   cursor: pointer;
+//   font-family: $Quicksand;
+//   font-size: 12pt;
+//   font-weight: bold;
+//   padding: 5px 10px 5px 10px;
+// }
 
 .show-pantry-recipes-btn {
   margin-top: 10px;
+  @include button-format;
 }
 
 .show-all-btn {
   height: 40px;
   margin-top: 20px;
   width: 200px;
+  @include button-format;
 }
 
-.filter-btn:hover {
-  background-color: #84C8A4;
+.filter-btn {
+  @include button-format;
+
+  &:hover {
+    background-color: #84C8A4;
+  }
 }
+
+
 
 
 /* PANTRY LIST */
@@ -382,6 +420,20 @@ main {
   top: 15%;
   width: 70%;
   z-index: 1000;
+
+  &h4 {
+    background: white;
+    color: $green-recipe-title;
+  }
+
+  &p,
+  &ol {
+    margin-left: 2%;
+  }
+
+  // &ol {
+  //   margin-right: 2%;
+  // }
 }
 
 #exit-recipe-btn {
@@ -395,12 +447,17 @@ main {
   margin: -4% -3% 2% -1%;
   position: fixed;
   transition: .3s ease;
+
+  &:hover {
+    background: $green-title-border;
+    transition: .3s ease;
+  }
 }
 
-#exit-recipe-btn:hover {
-  background: $green-title-border;
-  transition: .3s ease;
-}
+// #exit-recipe-btn:hover {
+//   background: $green-title-border;
+//   transition: .3s ease;
+// }
 
 #recipe-title {
   background-repeat: no-repeat;
@@ -414,18 +471,18 @@ main {
   text-shadow: 0px 0px 6px black;
 }
 
-.recipe-instructions h4 {
-  background: white;
-  color: $green-recipe-title;
-}
-
-.recipe-instructions p {
-  margin-left: 2%;
-}
-
-.recipe-instructions ol {
-  margin-right: 2%;
-}
+// .recipe-instructions h4 {
+//   background: white;
+//   color: $green-recipe-title;
+// }
+//
+// .recipe-instructions p {
+//   margin-left: 2%;
+// }
+//
+// .recipe-instructions ol {
+//   margin-right: 2%;
+// }
 
 #overlay {
   filter:alpha(opacity=50);

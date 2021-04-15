@@ -9,3 +9,8 @@
   font-weight: bold;
   padding: 5px 10px 5px 10px;
 }
+
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+}
