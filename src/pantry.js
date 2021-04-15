@@ -12,15 +12,15 @@ class Pantry {
 
   findMissingIngredientsMeal(recipe) {
     const missingItems = [];
-    const items = recipe.ingredients.forEach(ingredient => {
-      if (!this.pantryIngredients.find(pantryItem => {
-        return (pantryItem.ingredient === ingredient.id) &&
-               (pantryItem.amount >= ingredient.quantity.amount)
-      })) {
-        const pantryAmount = this.pantryIngredients.find(pantryItem => pantryItem.ingredient === ingredient.id)
-      missingItems.push({ingredient: ingredient.name, amount: ingredient.quantity.amount - pantryAmount.amount})
+    recipe.ingredients.forEach(ingredient => {
+      if (!this.pantryIngredients.find(pantryItem => (pantryItem.ingredient === ingredient.id))) {
+        missingItems.push({ingredient: ingredient.name, amount: ingredient.quantity.amount});
       }
-    })
+      this.pantryIngredients.forEach(pantryItem => {
+        if ((pantryItem.ingredient === ingredient.id) && (pantryItem.amount < ingredient.quantity.amount))
+        missingItems.push({ingredient: ingredient.name, amount: ingredient.quantity.amount - pantryItem.amount})
+      }
+    )})
     return missingItems;
   }
 

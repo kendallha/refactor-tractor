@@ -149,6 +149,24 @@ let recipeData = [
       "appetizer",
       "hor d'oeuvre"
     ]
+  },
+  {
+    "name": "Berry Blast Smoothie",
+    "id": 678353,
+    "image": "https://spoonacular.com/recipeImages/678353-556x370.jpg",
+    "ingredients": [
+      {
+        "name": "blueberries",
+        "id": 123584,
+        "quantity": {
+          "amount": 1.5,
+          "unit": "cups"
+        }
+      },
+    ],
+    "tags": [
+      "dessert"
+    ]
   }
 ];
 
