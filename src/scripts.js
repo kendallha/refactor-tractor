@@ -1,7 +1,3 @@
-import users from './data/users-data';
-import recipeData from  './data/recipe-data';
-import ingredientData from './data/ingredient-data';
-
 import './css/base.scss';
 import './css/styles.scss';
 
@@ -23,11 +19,13 @@ let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let tagList = document.querySelector(".tag-list");
 let user;
+let users;
+let recipeData;
+let ingredientsData;
 
 
-window.addEventListener("load", createCards);
-window.addEventListener("load", findTags);
-window.addEventListener("load", generateUser);
+
+window.addEventListener("load", loadDataFromAPI);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
@@ -37,6 +35,34 @@ searchBtn.addEventListener("click", searchRecipes);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
 
+//ON LOAD HELPER FUNCTION
+function loadDOM() {
+  createCards();
+  findTags();
+  generateUser();
+}
+
+//FETCH DATA FROM API
+function loadDataFromAPI() {
+  const usersPromise = fetch("http://localhost:3001/api/v1/users")
+    .then(response => response.json())
+    .then(data => users = data)
+    .catch(error => console.log(error));
+
+  const recipesPromise = fetch("http://localhost:3001/api/v1/recipes")
+    .then(response => response.json())
+    .then(data => recipeData = data)
+    .catch(error => console.log(error));
+
+  const ingredientsPromise = fetch("http://localhost:3001/api/v1/ingredients")
+    .then(response => response.json())
+    .then(data => ingredientsData = data)
+    .catch(error => console.log(error));
+
+  Promise.all([usersPromise, recipesPromise, ingredientsPromise])
+    .then(data => loadDOM())
+    .catch(error => console.log(error));
+}
 // GENERATE A USER ON LOAD
 function generateUser() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
@@ -295,7 +321,7 @@ function showAllRecipes() {
 
 // CREATE AND USE PANTRY
 function findPantryInfo() {
-  user.pantry.forEach(item => {
+  user.pantry.pantryIngredients.forEach(item => {
     let itemInfo = ingredientsData.find(ingredient => {
       return ingredient.id === item.ingredient;
     });
