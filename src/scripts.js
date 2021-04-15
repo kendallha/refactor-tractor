@@ -1,4 +1,4 @@
-import users from './data/users-data';
+// import users from './data/users-data';
 import recipeData from  './data/recipe-data';
 import ingredientsData from './data/ingredient-data';
 
@@ -23,13 +23,15 @@ let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let tagList = document.querySelector(".tag-list");
 let user;
-let usersFromData;
+let users;
+// let recipeData;
+// let ingredientsData;
 
 
 // window.addEventListener("load", createCards);
 // window.addEventListener("load", findTags);
 // window.addEventListener("load", generateUser);
-window.addEventListener("load", loadDOM);
+// window.addEventListener("load", loadDOM);
 window.addEventListener("load", loadDataFromAPI);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
@@ -51,8 +53,9 @@ function loadDOM() {
 function loadDataFromAPI() {
   fetch("http://localhost:3001/api/v1/users")
   .then(response => response.json())
-  .then(data => usersFromData = data)
-  .then(data => console.log(usersFromData))
+  .then(data => users = data)
+  .then(data => console.log(users))
+  .then(data => loadDOM())
   .catch(error => console.log(error));
 }
 // GENERATE A USER ON LOAD
