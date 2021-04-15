@@ -1,5 +1,5 @@
-const domUpdates = {
-  displayUser: function displayUser(user) {
+let domUpdates = {
+  displayUser(user) {
     let firstName = user.name.split(" ")[0];
     let welcomeMsg = `
       <div class="welcome-msg">
@@ -8,8 +8,7 @@ const domUpdates = {
     document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
       welcomeMsg);
   },
-
-  addRecipeCard: function addToDom(recipeInfo, shortRecipeName) {
+  addToDom(recipeInfo, shortRecipeName, element) {
     let cardHtml = `
       <div class="recipe-card" id=${recipeInfo.id}>
         <h3 maxlength="40">${shortRecipeName}</h3>
@@ -22,10 +21,9 @@ const domUpdates = {
         <h4>${recipeInfo.tags[0]}</h4>
         <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
       </div>`
-    main.insertAdjacentHTML("beforeend", cardHtml);
+    element.insertAdjacentHTML("beforeend", cardHtml);
   },
-
-  listTags: function listTags(allTags) {
+  listTags(allTags) {
     allTags.forEach(tag => {
       let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
         <label for="${tag}">${capitalize(tag)}</label></li>`;
@@ -33,14 +31,14 @@ const domUpdates = {
     });
   },
 
-  hideUnselectedRecipes: function hideUnselectedRecipes(foundRecipes) {
+  hideUnselectedRecipes(foundRecipes) {
     foundRecipes.forEach(recipe => {
       let domRecipe = document.getElementById(`${recipe.id}`);
       domRecipe.style.display = "none";
     });
   },
 
-  showSavedRecipes: function showSavedRecipes() {
+  showSavedRecipes() {
     let unsavedRecipes = recipes.filter(recipe => {
       return !user.favoriteRecipes.includes(recipe.id);
     });
@@ -51,7 +49,7 @@ const domUpdates = {
     showMyRecipesBanner();
   },
 
-  generateRecipeTitle: function generateRecipeTitle(recipe, ingredients) {
+  generateRecipeTitle(recipe, ingredients) {
     let recipeTitle = `
       <button id="exit-recipe-btn">X</button>
       <h3 id="recipe-title">${recipe.name}</h3>
@@ -60,16 +58,16 @@ const domUpdates = {
     fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
   },
 
-  addRecipeImage: function addRecipeImage(recipe) {
+  addRecipeImage(recipe) {
     document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
   },
 
-  showMyRecipesBanner: function showMyRecipesBanner() {
+  showMyRecipesBanner() {
     document.querySelector(".welcome-msg").style.display = "none";
     document.querySelector(".my-recipes-banner").style.display = "block";
   },
 
-  showWelcomeBanner: function showWelcomeBanner() {
+  showWelcomeBanner() {
     document.querySelector(".welcome-msg").style.display = "flex";
     document.querySelector(".my-recipes-banner").style.display = "none";
   }
