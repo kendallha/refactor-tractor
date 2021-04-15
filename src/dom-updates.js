@@ -86,7 +86,7 @@ let domUpdates = {
     document.getElementById("overlay").remove();
   },
 
-  toggleMenu() {
+  toggleMenu(menuOpen) {
     var menuDropdown = document.querySelector(".drop-menu");
     menuOpen = !menuOpen;
     if (menuOpen) {
@@ -94,6 +94,22 @@ let domUpdates = {
     } else {
       menuDropdown.style.display = "none";
     }
+  },
+
+  isDescendant(parent, child) {
+    let node = child;
+    while (node !== null) {
+      if (node === parent) {
+        return true;
+      }
+      node = node.parentNode;
+    }
+    return false;
+  },
+
+  hideRecipes(recipeId) {
+    let domRecipe = document.getElementById(`${recipeId}`);
+    domRecipe.style.display = "none";
   }
 
 }

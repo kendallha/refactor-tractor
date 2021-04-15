@@ -3,6 +3,7 @@ import './css/styles.scss';
 import domUpdates from './dom-updates';
 import User from './user';
 import Recipe from './recipe';
+import RecipeRepository from './recipe-repository';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
@@ -29,14 +30,17 @@ window.addEventListener("load", loadDataFromAPI);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
-pantryBtn.addEventListener("click", domUpdates.toggleMenu);
+pantryBtn.addEventListener("click", () => {
+  domUpdates.toggleMenu(menuOpen);
+});
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchBtn.addEventListener("click", searchRecipes);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
 
 //ON LOAD HELPER FUNCTION
-function loadDOM() {
+function loadDOM([users, recipes, ingredients]) {
+  
   createCards();
   findTags();
   generateUser();
@@ -60,9 +64,10 @@ function loadDataFromAPI() {
     .catch(error => console.log(error));
 
   Promise.all([usersPromise, recipesPromise, ingredientsPromise])
-    .then(data => loadDOM())
+    .then(data => loadDOM(data))
     .catch(error => console.log(error));
 }
+
 // GENERATE A USER ON LOAD
 function generateUser() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
@@ -145,20 +150,9 @@ function addToMyRecipes() {
     }
   } else if (event.target.id === "exit-recipe-btn") {
     domUpdates.exitRecipe(fullRecipeInfo);
-  } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
+  } else if (domUpdates.isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeInfo(event);
   }
-}
-
-function isDescendant(parent, child) {
-  let node = child;
-  while (node !== null) {
-    if (node === parent) {
-      return true;
-    }
-    node = node.parentNode;
-  }
-  return false;
 }
 
 function showSavedRecipes() {
@@ -256,7 +250,7 @@ function showAllRecipes() {
     let domRecipe = document.getElementById(`${recipe.id}`);
     domRecipe.style.display = "block";
   });
-  domUpdates.showWelcomeBanner;
+  domUpdates.showWelcomeBanner();
 }
 
 // CREATE AND USE PANTRY
@@ -311,8 +305,9 @@ function findRecipesWithCheckedIngredients(selected) {
       allRecipeIngredients.push(ingredient.name);
     });
     if (!recipeChecker(allRecipeIngredients, ingredientNames)) {
-      let domRecipe = document.getElementById(`${recipe.id}`);
-      domRecipe.style.display = "none";
+      // let domRecipe = document.getElementById(`${recipe.id}`);
+      // domRecipe.style.display = "none";
+      domUpdates.hideRecipes(recipe.id);
     }
   })
 }
