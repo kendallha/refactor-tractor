@@ -1,7 +1,3 @@
-// import users from './data/users-data';
-// import recipeData from  './data/recipe-data';
-// import ingredientsData from './data/ingredient-data';
-
 import './css/base.scss';
 import './css/styles.scss';
 
