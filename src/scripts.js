@@ -1,6 +1,6 @@
 import './css/base.scss';
 import './css/styles.scss';
-
+import domUpdates from './dom-updates';
 import User from './user';
 import Recipe from './recipe';
 
@@ -269,10 +269,10 @@ function showMyRecipesBanner() {
   document.querySelector(".my-recipes-banner").style.display = "block";
 }
 
-function showWelcomeBanner() {
-  document.querySelector(".welcome-msg").style.display = "flex";
-  document.querySelector(".my-recipes-banner").style.display = "none";
-}
+// function showWelcomeBanner() {
+//   document.querySelector(".welcome-msg").style.display = "flex";
+//   document.querySelector(".my-recipes-banner").style.display = "none";
+// }
 
 // SEARCH RECIPES
 function pressEnterSearch(event) {
@@ -316,7 +316,7 @@ function showAllRecipes() {
     let domRecipe = document.getElementById(`${recipe.id}`);
     domRecipe.style.display = "block";
   });
-  showWelcomeBanner();
+  domUpdates.showWelcomeBanner;
 }
 
 // CREATE AND USE PANTRY
