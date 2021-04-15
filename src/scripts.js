@@ -1,6 +1,6 @@
 // import users from './data/users-data';
 // import recipeData from  './data/recipe-data';
-import ingredientsData from './data/ingredient-data';
+// import ingredientsData from './data/ingredient-data';
 
 import './css/base.scss';
 import './css/styles.scss';
@@ -25,7 +25,7 @@ let tagList = document.querySelector(".tag-list");
 let user;
 let users;
 let recipeData;
-// let ingredientsData;
+let ingredientsData;
 
 
 // window.addEventListener("load", createCards);
@@ -51,17 +51,22 @@ function loadDOM() {
 
 //FETCH DATA FROM API
 function loadDataFromAPI() {
-  fetch("http://localhost:3001/api/v1/users")
+  const usersPromise = fetch("http://localhost:3001/api/v1/users")
     .then(response => response.json())
     .then(data => users = data)
-    .then(data => console.log(users))
-    // .then(data => loadDOM())
     .catch(error => console.log(error));
 
-  fetch("http://localhost:3001/api/v1/recipes")
+  const recipesPromise = fetch("http://localhost:3001/api/v1/recipes")
     .then(response => response.json())
     .then(data => recipeData = data)
-    .then(data => console.log(recipeData))
+    .catch(error => console.log(error));
+
+  const ingredientsPromise = fetch("http://localhost:3001/api/v1/ingredients")
+    .then(response => response.json())
+    .then(data => ingredientsData = data)
+    .catch(error => console.log(error));
+
+  Promise.all([usersPromise, recipesPromise, ingredientsPromise])
     .then(data => loadDOM())
     .catch(error => console.log(error));
 }
@@ -323,7 +328,7 @@ function showAllRecipes() {
 
 // CREATE AND USE PANTRY
 function findPantryInfo() {
-  user.pantry.forEach(item => {
+  user.pantry.pantryIngredients.forEach(item => {
     let itemInfo = ingredientsData.find(ingredient => {
       return ingredient.id === item.ingredient;
     });
