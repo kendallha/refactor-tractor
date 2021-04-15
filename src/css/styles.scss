@@ -2,18 +2,7 @@
 @import '_mixins.scss';
 
 body {
-  background-color: $blue-background;
-  display: grid;
-  font-family: $Quicksand;
-  grid-template-columns: 1fr 5fr;
-  grid-template-areas:
-    "header header"
-    "image image"
-    "aside main";
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: auto;
+  @include body-display;
 }
 
 h1 {
@@ -27,7 +16,7 @@ h1 {
 }
 
 h2 {
-  color: #84C8A4;
+  color: $secondary-header-color;
   margin: 10px 0px 10px 0px;
 }
 
@@ -51,73 +40,195 @@ h4 {
 
 /* HEADER */
 header {
-  display: flex;
-  flex-direction: row;
+  @include flex-center;
+  // display: flex;
+  // flex-direction: row;
   grid-area: header;
   padding: 0% 0%;
-  width: 100%;
+  width: 100;
+
+    span {
+      color: $green-title-border;
+      font-weight: 400;
+    }
+
+    .header-apple-icon {
+      height: 40px;
+      margin-left: 5px;
+      width: 35px;
+    }
+
+    #search {
+      border-radius: 15px 15px 15px 15px;
+      border: 3px outset $green-title-border;
+      box-shadow: 0px 0px 7px 0px #475d74;
+      @include flex-center;
+      // display: flex;
+      // justify-content: center;
+      flex-direction: row;
+      font-family: $Quicksand;
+      margin: 1.2% 0.5% 1.2% 0%;
+      width: $full;
+    }
+
+    #search-input {
+      background-color: #b6dcca;
+      background: -webkit-gradient( linear,left top, left bottom, color-stop(0, rgb(255, 255, 255)), color-stop(1, rgb(225,225,225)));
+      border-radius: 10px 0px 0px 10px;
+      border: none;
+      box-shadow: inset -3px -1px 20px 1px #5c7894;
+      color: $blue-background;
+      font-family: $Quicksand;
+      font-size: 42px;
+      height: $full;
+      outline: none;
+      padding: 0% 2% 0% 0%;
+      text-align: right;
+      transition: .8s ease;
+      width: $full;
+
+      &:hover,
+      &:focus {
+        box-shadow: inset 0px 0px 0px 0px white;
+        transition: .8s ease;
+      }
+
+      &:focus::placeholder {
+        font-size: 0px;
+        // transition: .8s ease;
+      }
+
+      &::placeholder {
+        color: $blue-background;
+        font-size: 20px;
+        text-align: right;
+        text-shadow: none;
+      }
+    }
+
+    .search-label {
+      display: none;
+    }
+
+    .search-btn {
+      border-left: 3px outset $green-title-border;
+      border-radius: 0px 15px 15px 0px;
+      padding: 1%;
+    }
+
+    .nav-btn {
+
+      align-items: center;
+      background: $blue-background no-repeat;
+      border: none;
+      cursor: pointer;
+      @include flex-center;
+      // display: flex;
+      // justify-content: center;
+      flex-direction: column;
+      font-size: 0px;
+      font-weight: 700;
+      margin: 0%;
+      outline: none;
+      overflow: hidden;
+      text-align: center;
+      transition: .4s ease;
+      width: 15%;
+
+      &:hover {
+        color: $green-title-border;
+        font-size: 14px;
+        text-shadow: 0px 2px 4px black;
+        transition: .4s ease;
+      }
+
+      &img {
+        max-height: 40px;
+        max-width: 40px;
+        padding: 2px 0px;
+      }
+    }
 }
 
-span {
-  color: $green-title-border;
-  font-weight: 400;
-}
+// span {
+//   color: $green-title-border;
+//   font-weight: 400;
+// }
 
-.header-apple-icon {
-  height: 40px;
-  margin-left: 5px;
-  width: 35px;
-}
+// .header-apple-icon {
+//   height: 40px;
+//   margin-left: 5px;
+//   width: 35px;
+// }
 
-#search {
-  border-radius: 15px 15px 15px 15px;
-  border: 3px outset $green-title-border;
-  box-shadow: 0px 0px 7px 0px #475d74;
-  display: flex;
-  flex-direction: row;
-  font-family: $Quicksand;
-  justify-content: center;
-  margin: 1.2% 0.5% 1.2% 0%;
-  width: 100%;
-}
+// #search {
+//   border-radius: 15px 15px 15px 15px;
+//   border: 3px outset $green-title-border;
+//   box-shadow: 0px 0px 7px 0px #475d74;
+//   @include flex-center;
+//   // display: flex;
+//   // justify-content: center;
+//   flex-direction: row;
+//   font-family: $Quicksand;
+//   margin: 1.2% 0.5% 1.2% 0%;
+//   width: $full;
+// }
+//
+// #search-input {
+//   background-color: #b6dcca;
+//   background: -webkit-gradient( linear,left top, left bottom, color-stop(0, rgb(255, 255, 255)), color-stop(1, rgb(225,225,225)));
+//   border-radius: 10px 0px 0px 10px;
+//   border: none;
+//   box-shadow: inset -3px -1px 20px 1px #5c7894;
+//   color: $blue-background;
+//   font-family: $Quicksand;
+//   font-size: 42px;
+//   height: $full;
+//   outline: none;
+//   padding: 0% 2% 0% 0%;
+//   text-align: right;
+//   transition: .8s ease;
+//   width: $full;
+//
+//   &:hover,
+//   &:focus {
+//     box-shadow: inset 0px 0px 0px 0px white;
+//     transition: .8s ease;
+//   }
+//
+//   &:focus::placeholder {
+//     font-size: 0px;
+//     // transition: .8s ease;
+//   }
+//
+//   &::placeholder {
+//     color: $blue-background;
+//     font-size: 20px;
+//     text-align: right;
+//     text-shadow: none;
+//   }
+// }
 
-#search-input {
-  background-color: #b6dcca;
-  background: -webkit-gradient( linear,left top, left bottom, color-stop(0, rgb(255, 255, 255)), color-stop(1, rgb(225,225,225)));
-  border-radius: 10px 0px 0px 10px;
-  border: none;
-  box-shadow: inset -3px -1px 20px 1px #5c7894;
-  color: $blue-background;
-  font-family: $Quicksand;
-  font-size: 42px;
-  height: 100%;
-  outline: none;
-  padding: 0% 2% 0% 0%;
-  text-align: right;
-  transition: .8s ease;
-  width: 100%;
-}
+// #search-input:hover {
+//   box-shadow: inset 0px 0px 0px 0px white;
+//   transition: .8s ease;
+// }
+//
+// #search-input:focus {
+//   box-shadow: inset 0px 0px 0px 0px white;
+// }
 
-#search-input:hover {
-  box-shadow: inset 0px 0px 0px 0px white;
-  transition: .8s ease;
-}
+// #search-input::placeholder {
+//   color: $blue-background;
+//   font-size: 20px;
+//   text-align: right;
+//   text-shadow: none;
+// }
 
-#search-input:focus {
-  box-shadow: inset 0px 0px 0px 0px white;
-}
-
-#search-input::placeholder {
-  color: $blue-background;
-  font-size: 20px;
-  text-align: right;
-  text-shadow: none;
-}
-
-#search-input:focus::placeholder {
-  font-size: 0px;
-  transition: .8s ease;
-}
+// #search-input:focus::placeholder {
+//   font-size: 0px;
+//   transition: .8s ease;
+// }
 
 .search-label {
   display: none;
@@ -130,16 +241,18 @@ span {
 }
 
 .nav-btn {
+
   align-items: center;
   background: $blue-background no-repeat;
   border: none;
   cursor: pointer;
-  display: flex;
+  @include flex-center;
+  // display: flex;
+  // justify-content: center;
   flex-direction: column;
   font-size: 0px;
   font-weight: 700;
-  justify-content: center;
-  // margin: 0%;
+  margin: 0%;
   outline: none;
   overflow: hidden;
   text-align: center;
@@ -189,7 +302,7 @@ span {
   grid-area: image;
   height: 150px;
   overflow: hidden;
-  width: 100%;
+  width: $full;
 }
 
 .my-recipes-banner,
@@ -201,7 +314,7 @@ span {
 .my-recipes-banner h1,
 .welcome-msg h1 {
   color: white;
-  width: 100%;
+  width: $full;
 }
 
 .my-recipes-banner {
@@ -217,36 +330,56 @@ span {
 /* FILTER SIDEBAR */
 aside {
   background-color: white;
-  display: flex;
-  justify-content: center;
+  @include flex-center;
+  // display: flex;
+  // justify-content: center;
   height: auto;
   text-align: center;
+
+    .wrap {
+      background-color: white;
+      height: 100vh;
+      padding: 10px;
+      position: relative;
+      width: 200px;
+    }
+
+    ul {
+      list-style-type: none;
+      text-align: left;
+      padding-left: 35px;
+    }
+
+    li {
+      margin: 2px;
+    }
 }
 
-.wrap {
-  background-color: white;
-  height: 100vh;
-  padding: 10px;
-  position: relative;
-  width: 200px;
-}
-
-ul {
-  list-style-type: none;
-  text-align: left;
-  padding-left: 35px;
-}
-
-li {
-  margin: 2px;
-}
+// .wrap {
+//   background-color: white;
+//   height: 100vh;
+//   padding: 10px;
+//   position: relative;
+//   width: 200px;
+// }
+//
+// ul {
+//   list-style-type: none;
+//   text-align: left;
+//   padding-left: 35px;
+// }
+//
+// li {
+//   margin: 2px;
+// }
 
 
 /* RECIPE CARD SECTION */
 main {
   grid-area: main;
-  display: flex;
-  justify-content: center;
+  @include flex-center;
+  // display: flex;
+  // justify-content: center;
   align-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
@@ -269,9 +402,9 @@ main {
 
   &:hover .text {
     font-size: 20px;
-    opacity: 100%;
+    opacity: $full;
     transition: .5s ease;
-    width: 100%;
+    width: $full;
   }
 
   &:hover h3 {
@@ -287,9 +420,9 @@ main {
 //
 // .recipe-card:hover .text {
 //   font-size: 20px;
-//   opacity: 100%;
+//   opacity: $full;
 //   transition: .5s ease;
-//   width: 100%;
+//   width: $full;
 // }
 //
 // .recipe-card:hover h3 {
@@ -313,14 +446,15 @@ main {
   cursor: pointer;
   height: 130px;
   transition: .8s ease;
-  width: 100%;
+  width: $full;
 }
 
 .card-photo-container {
   align-items: center;
-  display: flex;
+  @include flex-center;
+  // display: flex;
+  // justify-content: center;
   height: 130px;
-  justify-content: center;
   position: relative;
 }
 
@@ -355,21 +489,21 @@ main {
 
 .show-pantry-recipes-btn {
   margin-top: 10px;
-  @include button-format;
+  @include button-format();
 }
 
 .show-all-btn {
   height: 40px;
   margin-top: 20px;
   width: 200px;
-  @include button-format;
+  @include button-format();
 }
 
 .filter-btn {
-  @include button-format;
+  @include button-format();
 
   &:hover {
-    background-color: #84C8A4;
+    background-color: $secondary-header-color;
   }
 }
 
@@ -390,12 +524,17 @@ main {
   text-align: center;
   width: 250px;
   z-index: 3;
+
+  &h2 {
+    color: $green-recipe-title;
+    margin: 0px;
+  }
 }
 
-.drop-menu h2 {
-  color: $green-recipe-title;
-  margin: 0px;
-}
+// .drop-menu h2 {
+//   color: $green-recipe-title;
+//   margin: 0px;
+// }
 
 .pantry-list {
   color: #000000;
@@ -487,11 +626,11 @@ main {
 #overlay {
   filter:alpha(opacity=50);
   background-color: $blue-background;
-  height:100%;
+  height:$full;
   left:0;
   opacity:0.5;
   position:fixed;
   top:0;
-  width:100%;
+  width:$full;
   z-index:100;
 }
