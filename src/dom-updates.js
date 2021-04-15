@@ -23,12 +23,19 @@ let domUpdates = {
       </div>`
     element.insertAdjacentHTML("beforeend", cardHtml);
   },
-  listTags(allTags) {
+
+  listTags(allTags, element) {
     allTags.forEach(tag => {
       let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
-        <label for="${tag}">${capitalize(tag)}</label></li>`;
-      tagList.insertAdjacentHTML("beforeend", tagHtml);
+        <label for="${tag}">${domUpdates.capitalize(tag)}</label></li>`;
+      element.insertAdjacentHTML("beforeend", tagHtml);
     });
+  },
+
+  capitalize(words) {
+    return words.split(" ").map(word => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(" ");
   },
 
   hideUnselectedRecipes(foundRecipes) {
@@ -46,16 +53,16 @@ let domUpdates = {
       let domRecipe = document.getElementById(`${recipe.id}`);
       domRecipe.style.display = "none";
     });
-    showMyRecipesBanner();
+    domUpdates.showMyRecipesBanner();
   },
 
-  generateRecipeTitle(recipe, ingredients) {
+  generateRecipeTitle(recipe, ingredients, element) {
     let recipeTitle = `
       <button id="exit-recipe-btn">X</button>
       <h3 id="recipe-title">${recipe.name}</h3>
       <h4>Ingredients</h4>
       <p>${ingredients}</p>`
-    fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
+    element.insertAdjacentHTML("beforeend", recipeTitle);
   },
 
   addRecipeImage(recipe) {
@@ -70,6 +77,23 @@ let domUpdates = {
   showWelcomeBanner() {
     document.querySelector(".welcome-msg").style.display = "flex";
     document.querySelector(".my-recipes-banner").style.display = "none";
+  },
+
+  exitRecipe(element) {
+    while (element.firstChild &&
+      element.removeChild(element.firstChild));
+    element.style.display = "none";
+    document.getElementById("overlay").remove();
+  },
+
+  toggleMenu() {
+    var menuDropdown = document.querySelector(".drop-menu");
+    menuOpen = !menuOpen;
+    if (menuOpen) {
+      menuDropdown.style.display = "block";
+    } else {
+      menuDropdown.style.display = "none";
+    }
   }
 
 }
