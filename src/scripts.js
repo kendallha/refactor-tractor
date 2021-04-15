@@ -24,10 +24,7 @@ let recipeData;
 let ingredientsData;
 
 
-// window.addEventListener("load", createCards);
-// window.addEventListener("load", findTags);
-// window.addEventListener("load", generateUser);
-// window.addEventListener("load", loadDOM);
+
 window.addEventListener("load", loadDataFromAPI);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
