@@ -29,7 +29,7 @@ describe('User', function() {
   });
 
   it('should initialize with a pantry', function() {
-    expect(user.pantry[0].ingredient).to.eq(1009016);
+    expect(user.pantry.pantryIngredients[0].ingredient).to.eq(1009016);
   });
 
   it('should initialize with an empty favoriteRecipes array', function() {
