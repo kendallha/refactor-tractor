@@ -63,6 +63,7 @@ function loadDataFromAPI() {
     .then(data => loadDOM())
     .catch(error => console.log(error));
 }
+
 // GENERATE A USER ON LOAD
 function generateUser() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
@@ -74,14 +75,10 @@ function generateUser() {
   document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
     welcomeMsg);
   findPantryInfo();
-  console.log(user.pantry.pantryIngredients[0])
-  console.log(user.id)
-  addIngredientsToPantry(user.id, user.pantry.pantryIngredients[0].ingredient, 500)
-  console.log(user.pantry.pantryIngredients[0])
 }
 
-// TEST FUNCTION FOR POST FETCH REQUEST
-function addIngredientsToPantry(userId, ingredientId, ingredientAmount) {
+// POST FETCH REQUEST
+function changePantryIngredientAmount(userId, ingredientId, ingredientAmount) {
   fetch("http://localhost:3001/api/v1/users", {
     method: "POST",
     body: JSON.stringify({
