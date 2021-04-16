@@ -2,8 +2,7 @@ import users from './data/users-data';
 import recipeData from  './data/recipe-data';
 import ingredientData from './data/ingredient-data';
 
-import './css/base.scss';
-import './css/styles.scss';
+import './index.js';
 
 import User from './user';
 import Recipe from './recipe';

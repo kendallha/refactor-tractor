@@ -41,11 +41,9 @@ h4 {
 /* HEADER */
 header {
   @include flex-center;
-  // display: flex;
-  // flex-direction: row;
   grid-area: header;
-  padding: 0% 0%;
-  width: 100;
+  padding: 0%;
+  width: $full;
 
     span {
       color: $green-title-border;
@@ -59,12 +57,10 @@ header {
     }
 
     #search {
-      border-radius: 15px 15px 15px 15px;
+      border-radius: 15px;
       border: 3px outset $green-title-border;
       box-shadow: 0px 0px 7px 0px #475d74;
       @include flex-center;
-      // display: flex;
-      // justify-content: center;
       flex-direction: row;
       font-family: $Quicksand;
       margin: 1.2% 0.5% 1.2% 0%;
@@ -90,12 +86,11 @@ header {
       &:hover,
       &:focus {
         box-shadow: inset 0px 0px 0px 0px white;
-        transition: .8s ease;
       }
 
       &:focus::placeholder {
         font-size: 0px;
-        // transition: .8s ease;
+        transition: .8s ease;
       }
 
       &::placeholder {
@@ -123,8 +118,6 @@ header {
       border: none;
       cursor: pointer;
       @include flex-center;
-      // display: flex;
-      // justify-content: center;
       flex-direction: column;
       font-size: 0px;
       font-weight: 700;
@@ -150,86 +143,6 @@ header {
     }
 }
 
-// span {
-//   color: $green-title-border;
-//   font-weight: 400;
-// }
-
-// .header-apple-icon {
-//   height: 40px;
-//   margin-left: 5px;
-//   width: 35px;
-// }
-
-// #search {
-//   border-radius: 15px 15px 15px 15px;
-//   border: 3px outset $green-title-border;
-//   box-shadow: 0px 0px 7px 0px #475d74;
-//   @include flex-center;
-//   // display: flex;
-//   // justify-content: center;
-//   flex-direction: row;
-//   font-family: $Quicksand;
-//   margin: 1.2% 0.5% 1.2% 0%;
-//   width: $full;
-// }
-//
-// #search-input {
-//   background-color: #b6dcca;
-//   background: -webkit-gradient( linear,left top, left bottom, color-stop(0, rgb(255, 255, 255)), color-stop(1, rgb(225,225,225)));
-//   border-radius: 10px 0px 0px 10px;
-//   border: none;
-//   box-shadow: inset -3px -1px 20px 1px #5c7894;
-//   color: $blue-background;
-//   font-family: $Quicksand;
-//   font-size: 42px;
-//   height: $full;
-//   outline: none;
-//   padding: 0% 2% 0% 0%;
-//   text-align: right;
-//   transition: .8s ease;
-//   width: $full;
-//
-//   &:hover,
-//   &:focus {
-//     box-shadow: inset 0px 0px 0px 0px white;
-//     transition: .8s ease;
-//   }
-//
-//   &:focus::placeholder {
-//     font-size: 0px;
-//     // transition: .8s ease;
-//   }
-//
-//   &::placeholder {
-//     color: $blue-background;
-//     font-size: 20px;
-//     text-align: right;
-//     text-shadow: none;
-//   }
-// }
-
-// #search-input:hover {
-//   box-shadow: inset 0px 0px 0px 0px white;
-//   transition: .8s ease;
-// }
-//
-// #search-input:focus {
-//   box-shadow: inset 0px 0px 0px 0px white;
-// }
-
-// #search-input::placeholder {
-//   color: $blue-background;
-//   font-size: 20px;
-//   text-align: right;
-//   text-shadow: none;
-// }
-
-// #search-input:focus::placeholder {
-//   font-size: 0px;
-//   transition: .8s ease;
-// }
-
 .search-label {
   display: none;
 }
@@ -241,14 +154,11 @@ header {
 }
 
 .nav-btn {
-
   align-items: center;
   background: $blue-background no-repeat;
   border: none;
   cursor: pointer;
   @include flex-center;
-  // display: flex;
-  // justify-content: center;
   flex-direction: column;
   font-size: 0px;
   font-weight: 700;
@@ -271,30 +181,16 @@ header {
     max-width: 40px;
     padding: 2px 0px;
   }
+
+  .saved-ingredients-btn {
+    border-left: 3px solid $green-title-border;
+  }
+
+  .ing-pan-btn {
+    margin: 1% 0%;
+    padding: 1px 6px 5px 0px;
+  }
 }
-
-// .nav-btn:hover {
-//   color: $green-title-border;
-//   font-size: 14px;
-//   text-shadow: 0px 2px 4px black;
-//   transition: .4s ease;
-// }
-//
-// .nav-btn img {
-//   max-height: 40px;
-//   max-width: 40px;
-//   padding: 2px 0px;
-// }
-
-.saved-ingredients-btn {
-  border-left: 3px solid $green-title-border;
-}
-
-.ing-pan-btn {
-  margin: 1% 0%;
-  padding: 1px 6px 5px 0px;
-}
-
 
 /* BANNER IMAGE*/
 .banner-image {
@@ -326,13 +222,10 @@ header {
   margin-top: 50px;
 }
 
-
 /* FILTER SIDEBAR */
 aside {
   background-color: white;
   @include flex-center;
-  // display: flex;
-  // justify-content: center;
   height: auto;
   text-align: center;
 
@@ -355,137 +248,83 @@ aside {
     }
 }
 
-// .wrap {
-//   background-color: white;
-//   height: 100vh;
-//   padding: 10px;
-//   position: relative;
-//   width: 200px;
-// }
-//
-// ul {
-//   list-style-type: none;
-//   text-align: left;
-//   padding-left: 35px;
-// }
-//
-// li {
-//   margin: 2px;
-// }
-
-
 /* RECIPE CARD SECTION */
 main {
   grid-area: main;
   @include flex-center;
-  // display: flex;
-  // justify-content: center;
   align-content: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
-}
 
-.recipe-card {
-  background-color: white;
-  border: 2px solid $green-title-border;
-  border-radius: 7px;
-  cursor: pointer;
-  height: 270px;
-  margin: 20px;
-  padding: 15px;
-  width: 250px;
+  .recipe-card {
+    background-color: white;
+    border: 2px solid $green-title-border;
+    border-radius: 7px;
+    cursor: pointer;
+    height: 270px;
+    margin: 20px;
+    padding: 15px;
+    width: 250px;
 
-  &:hover .card-photo-preview {
-    opacity: 50%;
-    transition: .8s ease;
+    &:hover .card-photo-preview {
+      opacity: 50%;
+      transition: .8s ease;
+    }
+
+    &:hover .text {
+      font-size: 20px;
+      opacity: $full;
+      transition: .5s ease;
+      width: $full;
+    }
+
+    &:hover h3 {
+      text-shadow: 0px 0px 4px $green-title-border;
+      transition: .8s ease;
+    }
   }
 
-  &:hover .text {
-    font-size: 20px;
-    opacity: $full;
-    transition: .5s ease;
+  .card-apple-icon {
+    cursor: pointer;
+    float: right;
+    height: 50px;
+    padding-bottom: 10px;
+    width: 45px;
+  }
+
+  .card-photo-preview {
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 7px;
+    cursor: pointer;
+    height: 130px;
+    transition: .8s ease;
     width: $full;
   }
 
-  &:hover h3 {
-    text-shadow: 0px 0px 4px $green-title-border;
-    transition: .8s ease;
+  .card-photo-container {
+    align-items: center;
+    @include flex-center;
+    height: 130px;
+    position: relative;
+  }
+
+  .text {
+    background: $green-recipe-title;
+    color: white;
+    font-weight: 700;
+    font-size: 0px;
+    opacity: 0%;
+    padding: 0%;
+    position: absolute;
+    text-align: center;
+    width: 0%;
+    transition: .5s ease;
   }
 }
-//
-// .recipe-card:hover .card-photo-preview {
-//   opacity: 50%;
-//   transition: .8s ease;
-// }
-//
-// .recipe-card:hover .text {
-//   font-size: 20px;
-//   opacity: $full;
-//   transition: .5s ease;
-//   width: $full;
-// }
-//
-// .recipe-card:hover h3 {
-//   text-shadow: 0px 0px 4px $green-title-border;
-//   transition: .8s ease;
-// }
-
-.card-apple-icon {
-  cursor: pointer;
-  float: right;
-  height: 50px;
-  padding-bottom: 10px;
-  width: 45px;
-}
-
-.card-photo-preview {
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 7px;
-  cursor: pointer;
-  height: 130px;
-  transition: .8s ease;
-  width: $full;
-}
-
-.card-photo-container {
-  align-items: center;
-  @include flex-center;
-  // display: flex;
-  // justify-content: center;
-  height: 130px;
-  position: relative;
-}
-
-.text {
-  background: $green-recipe-title;
-  color: white;
-  font-weight: 700;
-  font-size: 0px;
-  opacity: 0%;
-  padding: 0%;
-  position: absolute;
-  text-align: center;
-  width: 0%;
-  transition: .5s ease;
-}
-
 
 /* BUTTONS */
-// .show-pantry-recipes-btn,
-// .show-all-btn,
-// .filter-btn {
-//   background-color: $green-recipe-title;
-//   border: 0;
-//   border-radius: 3px;
-//   color: white;
-//   cursor: pointer;
-//   font-family: $Quicksand;
-//   font-size: 12pt;
-//   font-weight: bold;
-//   padding: 5px 10px 5px 10px;
-// }
 
 .show-pantry-recipes-btn {
   margin-top: 10px;
@@ -531,17 +370,11 @@ main {
   }
 }
 
-// .drop-menu h2 {
-//   color: $green-recipe-title;
-//   margin: 0px;
-// }
-
 .pantry-list {
   color: #000000;
   padding-left: 15px;
   text-align: left;
 }
-
 
 /* RECIPE INSTRUCTIONS */
 .recipe-instructions {
@@ -565,14 +398,13 @@ main {
     color: $green-recipe-title;
   }
 
-  &p,
-  &ol {
+  &p {
     margin-left: 2%;
   }
 
-  // &ol {
-  //   margin-right: 2%;
-  // }
+  &ol {
+    margin-right: 2%;
+  }
 }
 
 #exit-recipe-btn {
@@ -593,11 +425,6 @@ main {
   }
 }
 
-// #exit-recipe-btn:hover {
-//   background: $green-title-border;
-//   transition: .3s ease;
-// }
-
 #recipe-title {
   background-repeat: no-repeat;
   background-size: cover;
@@ -609,19 +436,6 @@ main {
   text-align: center;
   text-shadow: 0px 0px 6px black;
 }
-
-// .recipe-instructions h4 {
-//   background: white;
-//   color: $green-recipe-title;
-// }
-//
-// .recipe-instructions p {
-//   margin-left: 2%;
-// }
-//
-// .recipe-instructions ol {
-//   margin-right: 2%;
-// }
 
 #overlay {
   filter:alpha(opacity=50);
