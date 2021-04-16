@@ -34,6 +34,7 @@ filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
 pantryBtn.addEventListener("click", () => {
   domUpdates.toggleMenu(menuOpen);
+  menuOpen = !menuOpen;
 });
 savedRecipesBtn.addEventListener("click", () => {
   domUpdates.showSavedRecipes(recipes, user);
@@ -166,27 +167,14 @@ function openRecipeInfo(event) {
   let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
   domUpdates.generateRecipeTitle(recipe, generateIngredients(recipe), fullRecipeInfo);
   domUpdates.addRecipeImage(recipe);
-  generateInstructions(recipe);
-  fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
+  domUpdates.displayRecipeInstructions(recipe, fullRecipeInfo);
+  domUpdates.displayRecipeInfo(fullRecipeInfo);
 }
 
 function generateIngredients(recipe) {
   return recipe && recipe.ingredients.map(i => {
-    // console.log(recipe.ingredients);
     return `${i.name} (${i.quantity.amount} ${i.quantity.unit})`
   }).join(", ");
-}
-
-function generateInstructions(recipe) {
-  let instructionsList = "";
-  let instructions = recipe.instructions.map(i => {
-    return i.instruction
-  });
-  instructions.forEach(i => {
-    instructionsList += `<li>${i}</li>`
-  });
-  fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
-  fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
 }
 
 // SEARCH RECIPES
@@ -233,16 +221,7 @@ function findPantryInfo() {
       pantryInfo.push({name: itemInfo.name, count: item.amount});
     }
   });
-  displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
-}
-
-function displayPantryInfo(pantry) {
-  pantry.forEach(ingredient => {
-    let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
-      <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
-    document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
-      ingredientHtml);
-  });
+  domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
 }
 
 function findCheckedPantryBoxes() {
@@ -251,7 +230,7 @@ function findCheckedPantryBoxes() {
   let selectedIngredients = pantryCheckboxInfo.filter(box => {
     return box.checked;
   })
-  .domUpdatesshowAllRecipes(recipes);
+  domUpdates.showAllRecipes(recipes);
   if (selectedIngredients.length > 0) {
     findRecipesWithCheckedIngredients(selectedIngredients);
   }

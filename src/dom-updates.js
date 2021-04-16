@@ -8,6 +8,7 @@ let domUpdates = {
     document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
       welcomeMsg);
   },
+  
   addToDom(recipeInfo, shortRecipeName, element) {
     let cardHtml = `
       <div class="recipe-card" id=${recipeInfo.id}>
@@ -88,7 +89,6 @@ let domUpdates = {
 
   toggleMenu(menuOpen) {
     var menuDropdown = document.querySelector(".drop-menu");
-    menuOpen = !menuOpen;
     if (menuOpen) {
       menuDropdown.style.display = "block";
     } else {
@@ -118,6 +118,31 @@ let domUpdates = {
       domRecipe.style.display = "block";
     });
     domUpdates.showWelcomeBanner();
+  },
+
+  displayPantryInfo(pantry) {
+    pantry.forEach(ingredient => {
+      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
+        <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
+      document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
+        ingredientHtml);
+    });
+  },
+
+  displayRecipeInfo(element) {
+    element.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
+  },
+
+  displayRecipeInstructions(recipe, element) {
+    let instructionsList = "";
+    let instructions = recipe.instructions.map(i => {
+      return i.instruction
+    });
+    instructions.forEach(i => {
+      instructionsList += `<li>${i}</li>`
+    });
+    element.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
+    element.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
   }
 
 }
