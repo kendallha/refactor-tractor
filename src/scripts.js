@@ -74,16 +74,23 @@ function generateUser() {
   document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
     welcomeMsg);
   findPantryInfo();
+  console.log(user.pantry.pantryIngredients[0])
+  console.log(user.id)
+  addIngredientsToPantry(user.id, user.pantry.pantryIngredients[0].ingredient, 500)
+  console.log(user.pantry.pantryIngredients[0])
 }
 
 // TEST FUNCTION FOR POST FETCH REQUEST
-function addIngredientsToPantry(ingredientId, ingredientAmount) {
+function addIngredientsToPantry(userId, ingredientId, ingredientAmount) {
   fetch("http://localhost:3001/api/v1/users", {
     method: "POST",
-    body: {
-      "userID": user.id,
-      "ingredientID": ingredientId,
-      "ingredientModification": ingredientAmount
+    body: JSON.stringify({
+      userID: userId,
+      ingredientID: ingredientId,
+      ingredientModification: ingredientAmount
+    }),
+    headers: {
+   'Content-Type': 'application/json'
     }
   })
     .then(response => response.json())
