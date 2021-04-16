@@ -8,7 +8,31 @@ let domUpdates = {
     document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
       welcomeMsg);
   },
-  
+
+  displayTags(recipeRepo, element) {
+    let tags = [];
+   recipeRepo.recipes.forEach(recipe => {
+     recipe.tags.forEach(tag => {
+       if (!tags.includes(tag)) {
+         tags.push(tag);
+       }
+     });
+   });
+   tags.sort();
+   domUpdates.listTags(tags, element);
+ },
+
+ createCards(recipeRepo, element) {
+  element.innerHTML = '';
+  recipeRepo.recipes.forEach(recipe => {
+    let recipeName = recipe.name;
+  if (recipe.name.length > 40) {
+    recipeName = recipe.name.substring(0, 40) + "...";
+  }
+  domUpdates.addToDom(recipe, recipeName, element)
+});
+},
+
   addToDom(recipeInfo, shortRecipeName, element) {
     let cardHtml = `
       <div class="recipe-card" id=${recipeInfo.id}>
@@ -40,10 +64,12 @@ let domUpdates = {
   },
 
   hideUnselectedRecipes(foundRecipes) {
-    foundRecipes.forEach(recipe => {
-      let domRecipe = document.getElementById(`${recipe.id}`);
+    // foundRecipes.forEach(recipe => {
+    //   let domRecipe = document.getElementById(`${recipe.id}`);
+    //   domRecipe.style.display = "none";
+    // });
+      let domRecipe = document.getElementById(`${foundRecipes.id}`);
       domRecipe.style.display = "none";
-    });
   },
 
   showSavedRecipes(recipes, user) {
