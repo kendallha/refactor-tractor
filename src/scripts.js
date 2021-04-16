@@ -7,7 +7,7 @@ import RecipeRepository from './recipe-repository';
 
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
-let fullRecipeInfo = document.querySelector(".recipe-instructions");
+let fullRecipeInfo = document.querySelector("#recipe-instructions");
 let main = document.querySelector("main");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
@@ -20,7 +20,6 @@ let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let tagList = document.querySelector(".tag-list");
 let user;
-let users;
 let recipeData;
 let ingredientsData;
 let recipeRepo;
@@ -129,13 +128,15 @@ function addToMyRecipes() {
 // CREATE RECIPE INSTRUCTIONS
 function openRecipeInfo(event) {
   fullRecipeInfo.style.display = "inline";
+  // fullRecipeInfo.classList.remove("hidden");
+  console.log("change");
+  console.log(fullRecipeInfo);
   let recipeId = event.path.find(e => e.id).id;
   let recipe = recipeRepo.recipes.find(recipe => recipe.id === Number(recipeId));
-  console.log(recipe);
   domUpdates.generateRecipeTitle(recipe, generateIngredients(recipe), fullRecipeInfo);
-  domUpdates.addRecipeImage(recipe);
+   domUpdates.addRecipeImage(recipe);
   domUpdates.displayRecipeInstructions(recipe, fullRecipeInfo);
-  domUpdates.displayRecipeInfo(fullRecipeInfo);
+  //domUpdates.displayRecipeInfo(fullRecipeInfo);
 }
 
 function generateIngredients(recipe) {

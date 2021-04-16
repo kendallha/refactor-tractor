@@ -23,7 +23,13 @@ let domUpdates = {
  },
 
  createCards(recipeRepo, element) {
-  element.innerHTML = '';
+  // element.innerHTML = ` <div id='recipe-instructions' class="recipe-instructions">
+  //     </div>
+  //     <div class="my-recipes-banner">
+  //       <h1>My Recipes</h1>
+  //       <button class="show-all-btn">Show All Recipes</button>
+  //     </div>`;
+  // this.removeElements(element);
   recipeRepo.recipes.forEach(recipe => {
     let recipeName = recipe.name;
   if (recipe.name.length > 40) {
@@ -32,6 +38,12 @@ let domUpdates = {
   domUpdates.addToDom(recipe, recipeName, element)
 });
 },
+
+// removeElements(element) {
+//   let cards = document.getElementsByClassName('recipe-card');
+//   console.log(cards);
+//   cards.forEach(card => card.element.remove(card));
+// },
 
   addToDom(recipeInfo, shortRecipeName, element) {
     let cardHtml = `
@@ -89,7 +101,8 @@ let domUpdates = {
       <h3 id="recipe-title">${recipe.name}</h3>
       <h4>Ingredients</h4>
       <p>${ingredients}</p>`
-    element.insertAdjacentHTML("beforeend", recipeTitle);
+    // element.insertAdjacentHTML("beforeend", recipeTitle);
+    element.innerHTML += recipeTitle;
   },
 
   addRecipeImage(recipe) {
@@ -156,7 +169,8 @@ let domUpdates = {
   },
 
   displayRecipeInfo(element) {
-    element.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
+    element.insertAdjacentHTML("beforebegin", "<section id='overlay'></section>");
+    // element.setAttribute('id','overlay');
   },
 
   displayRecipeInstructions(recipe, element) {
