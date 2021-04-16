@@ -78,17 +78,17 @@ function generateUser() {
 
 // TEST FUNCTION FOR POST FETCH REQUEST
 function addIngredientsToPantry(ingredientId, ingredientAmount) {
-    fetch('http://localhost:3001/api/v1/users'{
-      method: 'POST',
-      body: {
-        "userID": user.id,
-        "ingredientID": ingredientId,
-        "ingredientModification": ingredientAmount
-      }
-    })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.log(error))
+  fetch("http://localhost:3001/api/v1/users", {
+    method: "POST",
+    body: {
+      "userID": user.id,
+      "ingredientID": ingredientId,
+      "ingredientModification": ingredientAmount
+    }
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
 }
 
 // CREATE RECIPE CARDS
