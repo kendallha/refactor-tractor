@@ -1,6 +1,7 @@
 @import '_variables.scss';
 @import '_mixins.scss';
 
+
 body {
   @include body-display;
 }
@@ -112,7 +113,6 @@ header {
     }
 
     .nav-btn {
-
       align-items: center;
       background: $blue-background no-repeat;
       border: none;
@@ -450,3 +450,5 @@ main {
   width:$full;
   z-index:100;
 }
+
+@import '_media-queries.scss'; 
