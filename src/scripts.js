@@ -23,8 +23,7 @@ let user;
 let users;
 let recipeData;
 let ingredientsData;
-
-
+let recipeRepo;
 
 window.addEventListener("load", loadDataFromAPI);
 allRecipesBtn.addEventListener("click", () => {
@@ -45,27 +44,28 @@ searchForm.addEventListener("submit", pressEnterSearch);
 
 //ON LOAD HELPER FUNCTION
 function loadDOM([users, recipes, ingredients]) {
-  
+  recipeRepo = new RecipeRepository(recipes);
+  ingredientsData = ingredients;
   createCards();
-  findTags();
-  generateUser();
+  displayTags();
+  generateUser(users);
 }
 
 //FETCH DATA FROM API
 function loadDataFromAPI() {
   const usersPromise = fetch("http://localhost:3001/api/v1/users")
     .then(response => response.json())
-    .then(data => users = data)
+    .then(data => data)
     .catch(error => console.log(error));
 
   const recipesPromise = fetch("http://localhost:3001/api/v1/recipes")
     .then(response => response.json())
-    .then(data => recipeData = data)
+    .then(data => data)
     .catch(error => console.log(error));
 
   const ingredientsPromise = fetch("http://localhost:3001/api/v1/ingredients")
     .then(response => response.json())
-    .then(data => ingredientsData = data)
+    .then(data => data)
     .catch(error => console.log(error));
 
   Promise.all([usersPromise, recipesPromise, ingredientsPromise])
@@ -74,7 +74,7 @@ function loadDataFromAPI() {
 }
 
 // GENERATE A USER ON LOAD
-function generateUser() {
+function generateUser(users) {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   domUpdates.displayUser(user);
   findPantryInfo();
@@ -82,21 +82,23 @@ function generateUser() {
 
 // CREATE RECIPE CARDS
 function createCards() {
-  recipeData.forEach(recipe => {
-    let recipeInfo = new Recipe(recipe);
-    let shortRecipeName = recipeInfo.name;
-    recipes.push(recipeInfo);
-    if (recipeInfo.name.length > 40) {
-      shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
+  // recipeData.forEach(recipe => {
+    // let recipeInfo = new Recipe(recipe);
+    // let shortRecipeName = recipeInfo.name;
+    // recipes.push(recipeInfo);
+    recipeRepo.recipes.forEach(recipe => {
+      let recipeName = recipe.name;
+    if (recipe.name.length > 40) {
+      recipeName = recipe.name.substring(0, 40) + "...";
     }
-    domUpdates.addToDom(recipeInfo, shortRecipeName, main)
+    domUpdates.addToDom(recipe, recipeName, main)
   });
 }
 
 // FILTER BY RECIPE TAGS
-function findTags() {
-  let tags = [];
-  recipeData.forEach(recipe => {
+function displayTags() {
+   let tags = [];
+  recipeRepo.recipes.forEach(recipe => {
     recipe.tags.forEach(tag => {
       if (!tags.includes(tag)) {
         tags.push(tag);
