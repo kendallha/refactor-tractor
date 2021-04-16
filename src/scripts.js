@@ -45,7 +45,7 @@ searchForm.addEventListener("submit", pressEnterSearch);
 
 //ON LOAD HELPER FUNCTION
 function loadDOM([users, recipes, ingredients]) {
-  
+
   createCards();
   findTags();
   generateUser();
