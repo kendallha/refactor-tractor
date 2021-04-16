@@ -128,7 +128,6 @@ function addToMyRecipes() {
 // CREATE RECIPE INSTRUCTIONS
 function openRecipeInfo(event) {
   fullRecipeInfo.style.display = "inline";
-  // fullRecipeInfo.classList.remove("hidden");
   console.log("change");
   console.log(fullRecipeInfo);
   let recipeId = event.path.find(e => e.id).id;
@@ -141,7 +140,8 @@ function openRecipeInfo(event) {
 
 function generateIngredients(recipe) {
   return recipe && recipe.ingredients.map(i => {
-    return `${i.name} (${i.quantity.amount} ${i.quantity.unit})`
+    const ingredient = ingredientsData.find(ingredient => ingredient.id === i.id);
+    return `${ingredient.name} (${i.quantity.amount} ${i.quantity.unit})`
   }).join(", ");
 }
 
