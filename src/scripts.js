@@ -79,6 +79,26 @@ function generateUser(users) {
   findPantryInfo();
 }
 
+// POST FETCH REQUEST
+function changePantryIngredientAmount(userId, ingredientId, ingredientAmount) {
+  fetch("http://localhost:3001/api/v1/users", {
+    method: "POST",
+    body: JSON.stringify({
+      userID: userId,
+      ingredientID: ingredientId,
+      ingredientModification: ingredientAmount
+    }),
+    headers: {
+   'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
+}
+
+// CREATE RECIPE CARDS
+
 // FILTER BY RECIPE TAGS
 
 function findCheckedBoxes() {
