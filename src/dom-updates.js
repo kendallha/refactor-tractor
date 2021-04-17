@@ -85,13 +85,14 @@ let domUpdates = {
     domUpdates.showMyRecipesBanner();
   },
 
-  generateRecipeTitle(recipe, ingredients, element) {
+  generateRecipeTitle(recipe, ingredients, element, cost) {
     let recipeTitle = `
       <button id="exit-recipe-btn">X</button>
       <h3 id="recipe-title">${recipe.name}</h3>
       <h4>Ingredients</h4>
-      <p>${ingredients}</p>`
-    // element.insertAdjacentHTML("beforeend", recipeTitle);
+      <p>${ingredients}</p>
+      <h4>Cost</h4>
+      <p>${cost}<p>`
     element.innerHTML += recipeTitle;
   },
 
@@ -173,8 +174,7 @@ let domUpdates = {
     });
     element.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
     element.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
-  }
-
+  },
 }
 
 export default domUpdates;
