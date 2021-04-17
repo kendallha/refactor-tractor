@@ -1,0 +1,46 @@
+@mixin button-format() {
+  background-color: $green-recipe-title;
+  border: 0;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  font-family: $Quicksand;
+  font-size: 12pt;
+  font-weight: bold;
+  padding: 5px 10px 5px 10px;
+}
+
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin body-display() {
+  background-color: $blue-background;
+  display: grid;
+  font-family: $Quicksand;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas:
+    "header header"
+    "image image"
+    "aside main";
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: auto;
+}
+
+@mixin dropdown-menu() {
+  align-items: center;
+  background-color: #DAE4EE;
+  display: none;
+  height: 600px;
+  margin-left: 81%;
+  margin-top: 92px;
+  overflow: scroll;
+  padding: 12px;
+  position: absolute;
+  text-align: center;
+  width: 250px;
+  z-index: 3;
+}

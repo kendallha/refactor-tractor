@@ -114,7 +114,7 @@ function showFilteredRecipes() {
   const selectedRecipes = recipeRepo.filterRecipesByTag(selectedTags);
   recipeRepo.recipes.forEach(recipe => {
     if (selectedRecipes.length > 0 && !selectedRecipes.includes(recipe)) {
-  
+
       domUpdates.hideUnselectedRecipes(recipe);
     }
   })
