@@ -1,4 +1,4 @@
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
 
   body {
     display: flex;
@@ -39,7 +39,26 @@
     }
   }
 
-  .mobile-hidden {
-    display: none; 
+  aside {
+
+    .wrap {
+      width: 100vw;
+      height: auto;
+    }
+
+    .tag-list {
+      display: table-row;
+      width: 100vw;
+      padding: 0;
+    }
+
+
+    li {
+      display: -webkit-inline-box;
+      width: 32%;
+      margin-top: 5%;
+    }
+
   }
+
 }

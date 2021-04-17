@@ -331,18 +331,18 @@ main {
 /* BUTTONS */
 .show-pantry-recipes-btn {
   margin-top: 10px;
-  @include button-format();
+  @include button-format;
 }
 
 .show-all-btn {
   height: 40px;
   margin-top: 20px;
   width: 200px;
-  @include button-format();
+  @include button-format;
 }
 
 .filter-btn {
-  @include button-format();
+  @include button-format;
 
   &:hover {
     background-color: $secondary-header-color;
@@ -352,18 +352,7 @@ main {
 
 /* PANTRY LIST */
 .drop-menu {
-  align-items: center;
-  background-color: #DAE4EE;
-  display: none;
-  height: 600px;
-  margin-left: 81%;
-  margin-top: 92px;
-  overflow: scroll;
-  padding: 12px;
-  position: absolute;
-  text-align: center;
-  width: 250px;
-  z-index: 3;
+  @include dropdown-menu;
 
   &h2 {
     color: $green-recipe-title;
@@ -451,4 +440,4 @@ main {
   z-index:100;
 }
 
-@import '_media-queries.scss'; 
+@import '_media-queries.scss';
