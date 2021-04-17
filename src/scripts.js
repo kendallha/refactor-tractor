@@ -22,6 +22,11 @@ let ingredientsData;
 let recipeRepo;
 
 window.addEventListener("load", loadDataFromAPI);
+fullRecipeInfo.addEventListener("click", (e) => {
+  if (e.target.id === "addToList") {
+    addRecipeToList();
+  }
+});
 allRecipesBtn.addEventListener("click", () => {
    domUpdates.showAllRecipes(recipeRepo.recipes);
 });
@@ -37,6 +42,7 @@ savedRecipesBtn.addEventListener("click", () => {
 searchBtn.addEventListener("click", searchRecipes);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
+
 
 //ON LOAD HELPER FUNCTION
 function loadDOM([users, recipes, ingredients]) {
@@ -146,6 +152,7 @@ function openRecipeInfo(event) {
   domUpdates.generateRecipeTitle(recipe, generateIngredients(recipe), fullRecipeInfo, generateRecipeCost(recipe));
    domUpdates.addRecipeImage(recipe);
   domUpdates.displayRecipeInstructions(recipe, fullRecipeInfo);
+  return recipe;
   //domUpdates.displayRecipeInfo(fullRecipeInfo);
 }
 
@@ -159,6 +166,10 @@ function generateIngredients(recipe) {
 function generateRecipeCost(recipe) {
   const cost = recipe.calculateIngredientsCost(ingredientsData).toFixed(2);
   return `$${cost}`;
+}
+
+function addRecipeToList() {
+  console.log(openRecipeInfo());
 }
 
 // SEARCH RECIPES

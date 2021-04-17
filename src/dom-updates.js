@@ -114,6 +114,7 @@ let domUpdates = {
     while (element.firstChild &&
       element.removeChild(element.firstChild));
     element.style.display = "none";
+    element.innerHTML = `<button id="addToList">Add to List to Cook</button>`
     // document.getElementById("overlay").remove();
   },
 
@@ -174,7 +175,8 @@ let domUpdates = {
     });
     element.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
     element.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
-  },
+  }
+
 }
 
 export default domUpdates;
