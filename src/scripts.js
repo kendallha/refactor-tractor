@@ -1,5 +1,5 @@
-import './css/base.scss';
 import './css/styles.scss';
+import './index.js'; 
 import domUpdates from './dom-updates';
 import User from './user';
 import RecipeRepository from './recipe-repository';
