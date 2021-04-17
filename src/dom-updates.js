@@ -86,10 +86,11 @@ let domUpdates = {
   },
 
   generateRecipeTitle(recipe, ingredients, element, cost) {
+    element.id = `${recipe.id}`;
     let recipeTitle = `
       <button id="exit-recipe-btn">X</button>
-      <h3 id="recipe-title">${recipe.name}</h3>
-      <h4>Ingredients</h4>
+      <h3 class ="recipe-title" id="recipe-title">${recipe.name}</h3>
+      <h4 class="ingredients-label">Ingredients</h4>
       <p>${ingredients}</p>
       <h4>Cost</h4>
       <p>${cost}<p>`
