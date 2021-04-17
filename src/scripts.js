@@ -45,7 +45,7 @@ searchForm.addEventListener("submit", pressEnterSearch);
 
 //ON LOAD HELPER FUNCTION
 function loadDOM([users, recipes, ingredients]) {
-  
+
   createCards();
   findTags();
   generateUser();
@@ -78,6 +78,24 @@ function generateUser() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   domUpdates.displayUser(user);
   findPantryInfo();
+}
+
+// POST FETCH REQUEST
+function changePantryIngredientAmount(userId, ingredientId, ingredientAmount) {
+  fetch("http://localhost:3001/api/v1/users", {
+    method: "POST",
+    body: JSON.stringify({
+      userID: userId,
+      ingredientID: ingredientId,
+      ingredientModification: ingredientAmount
+    }),
+    headers: {
+   'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
 }
 
 // CREATE RECIPE CARDS
