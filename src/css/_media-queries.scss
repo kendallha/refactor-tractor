@@ -1,0 +1,64 @@
+@media screen and (max-width: 700px) {
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+
+    h1 {
+      font-size: 25px;
+      width: 55%;
+      align-self: center;
+
+      .header-apple-icon {
+        height: 30px;
+        width: 25px;
+      }
+    }
+
+    #search {
+      width: 70%;
+      height: 50%;
+    }
+
+    #search-input  {
+      font-size: 15px;
+
+      &::placeholder {
+        font-size: 12px;
+      }
+    }
+
+    .nav-btn img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  aside {
+
+    .wrap {
+      width: 100vw;
+      height: auto;
+    }
+
+    .tag-list {
+      display: table-row;
+      width: 100vw;
+      padding: 0;
+    }
+
+
+    li {
+      display: -webkit-inline-box;
+      width: 32%;
+      margin-top: 5%;
+    }
+
+  }
+
+}

@@ -1,5 +1,5 @@
-import './css/base.scss';
 import './css/styles.scss';
+import './index.js'; 
 import domUpdates from './dom-updates';
 import User from './user';
 import RecipeRepository from './recipe-repository';
@@ -114,7 +114,7 @@ function showFilteredRecipes() {
   const selectedRecipes = recipeRepo.filterRecipesByTag(selectedTags);
   recipeRepo.recipes.forEach(recipe => {
     if (selectedRecipes.length > 0 && !selectedRecipes.includes(recipe)) {
-  
+
       domUpdates.hideUnselectedRecipes(recipe);
     }
   })
