@@ -8,6 +8,7 @@ let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
+let pantrySection = document.querySelector(".pantry-list");
 let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
 let pantryInfo = [];
@@ -215,7 +216,7 @@ function findPantryInfo() {
       pantryInfo.push({name: itemInfo.name, count: item.amount});
     }
   });
-  domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
+  domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)), pantrySection);
 }
 
 function findCheckedPantryBoxes() {
