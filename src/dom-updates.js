@@ -154,7 +154,7 @@ let domUpdates = {
 
   displayPantryInfo(pantry, element) {
     pantry.forEach(ingredient => {
-      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
+      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.id}">
         <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
       // element.insertAdjacentHTML("beforeend",
       //   ingredientHtml);

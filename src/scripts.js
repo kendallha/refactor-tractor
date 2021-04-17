@@ -213,7 +213,7 @@ function findPantryInfo() {
     if (itemInfo && originalIngredient) {
       originalIngredient.count += item.amount;
     } else if (itemInfo) {
-      pantryInfo.push({name: itemInfo.name, count: item.amount});
+      pantryInfo.push({name: itemInfo.name, id: itemInfo.id, count: item.amount});
     }
   });
   domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)), pantrySection);
@@ -222,9 +222,16 @@ function findPantryInfo() {
 function findCheckedPantryBoxes() {
   let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
   let pantryCheckboxInfo = Array.from(pantryCheckboxes)
-  let selectedIngredients = pantryCheckboxInfo.filter(box => {
-    return box.checked;
+  // let selectedIngredients = pantryCheckboxInfo.filter(box => {
+  //   return box.checked;
+  // })
+  let selectedIngredients = [];
+  pantryCheckboxInfo.forEach(box => {
+    if (box.checked) {
+      selectedIngredients.push(box.id)
+    }
   })
+  console.log(selectedIngredients);
   domUpdates.showAllRecipes(recipeRepo.recipes);
   if (selectedIngredients.length > 0) {
     findRecipesWithCheckedIngredients(selectedIngredients);
@@ -236,7 +243,7 @@ function findRecipesWithCheckedIngredients(selected) {
   let ingredientNames = selected.map(item => {
     return item.id;
   })
-  recipes.forEach(recipe => {
+  recipeRepo.recipes.forEach(recipe => {
     let allRecipeIngredients = [];
     recipe.ingredients.forEach(ingredient => {
       allRecipeIngredients.push(ingredient.name);
