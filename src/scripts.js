@@ -143,7 +143,7 @@ function openRecipeInfo(event) {
   fullRecipeInfo.style.display = "inline";
   let recipeId = event.path.find(e => e.id).id;
   let recipe = recipeRepo.recipes.find(recipe => recipe.id === Number(recipeId));
-  domUpdates.generateRecipeTitle(recipe, generateIngredients(recipe), fullRecipeInfo);
+  domUpdates.generateRecipeTitle(recipe, generateIngredients(recipe), fullRecipeInfo, generateRecipeCost(recipe));
    domUpdates.addRecipeImage(recipe);
   domUpdates.displayRecipeInstructions(recipe, fullRecipeInfo);
   //domUpdates.displayRecipeInfo(fullRecipeInfo);
@@ -154,6 +154,11 @@ function generateIngredients(recipe) {
     const ingredient = ingredientsData.find(ingredient => ingredient.id === i.id);
     return `${ingredient.name} (${i.quantity.amount} ${i.quantity.unit})`
   }).join(", ");
+}
+
+function generateRecipeCost(recipe) {
+  const cost = recipe.calculateIngredientsCost(ingredientsData).toFixed(2);
+  return `$${cost}`;
 }
 
 // SEARCH RECIPES
