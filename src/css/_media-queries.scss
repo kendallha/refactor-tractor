@@ -11,6 +11,8 @@
 
     h1 {
       font-size: 25px;
+      width: 55%;
+      align-self: center;
 
       .header-apple-icon {
         height: 30px;
@@ -26,14 +28,18 @@
     #search-input  {
       font-size: 15px;
 
-      &:focus::placeholder {
-        font-size: 15px;
-      };
+      &::placeholder {
+        font-size: 12px;
+      }
+    }
+
+    .nav-btn img {
+      width: 20px;
+      height: 20px;
     }
   }
 
-  aside {
-    display: flex;
-    justify-content: center;
+  .mobile-hidden {
+    display: none; 
   }
 }
