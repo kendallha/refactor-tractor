@@ -23,13 +23,6 @@ let domUpdates = {
  },
 
  createCards(recipeRepo, element) {
-  // element.innerHTML = ` <div id='recipe-instructions' class="recipe-instructions">
-  //     </div>
-  //     <div class="my-recipes-banner">
-  //       <h1>My Recipes</h1>
-  //       <button class="show-all-btn">Show All Recipes</button>
-  //     </div>`;
-  // this.removeElements(element);
   recipeRepo.recipes.forEach(recipe => {
     let recipeName = recipe.name;
   if (recipe.name.length > 40) {
@@ -38,12 +31,6 @@ let domUpdates = {
   domUpdates.addToDom(recipe, recipeName, element)
 });
 },
-
-// removeElements(element) {
-//   let cards = document.getElementsByClassName('recipe-card');
-//   console.log(cards);
-//   cards.forEach(card => card.element.remove(card));
-// },
 
   addToDom(recipeInfo, shortRecipeName, element) {
     let cardHtml = `
@@ -76,12 +63,15 @@ let domUpdates = {
   },
 
   hideUnselectedRecipes(foundRecipes) {
-    // foundRecipes.forEach(recipe => {
-    //   let domRecipe = document.getElementById(`${recipe.id}`);
-    //   domRecipe.style.display = "none";
-    // });
       let domRecipe = document.getElementById(`${foundRecipes.id}`);
       domRecipe.style.display = "none";
+  },
+
+  unhideUnselectedRecipes(foundRecipes) {
+    foundRecipes.forEach(recipe => {
+    let domRecipe = document.getElementById(`${recipe.id}`);
+    domRecipe.style.display = "block";
+  })
   },
 
   showSavedRecipes(recipes, user) {
@@ -123,7 +113,7 @@ let domUpdates = {
     while (element.firstChild &&
       element.removeChild(element.firstChild));
     element.style.display = "none";
-    document.getElementById("overlay").remove();
+    // document.getElementById("overlay").remove();
   },
 
   toggleMenu(menuOpen) {
