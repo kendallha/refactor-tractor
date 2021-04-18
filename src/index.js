@@ -16,5 +16,6 @@ import './images/myrecipes_readme.png';
 import './images/pancakes.jpg';
 import './images/search.png';
 import './images/seasoning.png';
+import './images/cooking-pot.png';
 
 console.log('This is the JavaScript entry file - your code begins here.');
