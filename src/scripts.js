@@ -1,5 +1,5 @@
 import './css/styles.scss';
-import './index.js'; 
+import './index.js';
 import domUpdates from './dom-updates';
 import User from './user';
 import RecipeRepository from './recipe-repository';
@@ -169,7 +169,7 @@ function generateRecipeCost(recipe) {
 }
 
 function addRecipeToList(e) {
-  const recipeId = parseInt(e.target.closest("div").id);
+  const recipeId = parseInt(e.target.closest("article").id);
   const recipeToAdd = recipeRepo.recipes.find(recipe => recipe.id === recipeId);
   console.log(recipeId);
   user.decideToCook(recipeToAdd);
