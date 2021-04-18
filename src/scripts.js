@@ -20,6 +20,7 @@ let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let tagList = document.querySelector(".tag-list");
 let cookMealButton = document.querySelector("#cookMeal")
+let cookButtonWrapper = document.querySelector("#mealButtonWrapper")
 let user;
 let ingredientsData;
 let recipeRepo;
@@ -28,6 +29,9 @@ window.addEventListener("load", loadDataFromAPI);
 fullRecipeInfo.addEventListener("click", (e) => {
   if (e.target.id === "addToList") {
     addRecipeToList(e);
+  }
+  if (e.target.id === "cookMeal") {
+    evaluateMeal(e);
   }
 });
 allRecipesBtn.addEventListener("click", () => {
@@ -48,8 +52,11 @@ cookListButton.addEventListener("click", () => {
 searchBtn.addEventListener("click", searchRecipes);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
-cookMealButton.addEventListener("click", evaluateMeal);
-
+// cookMealButton.addEventListener("click", (e) => {
+//   if (e.target.id === "cookMeal") {
+//     evaluateMeal(e);
+//   }
+// })
 
 //ON LOAD HELPER FUNCTION
 function loadDOM([users, recipes, ingredients]) {
@@ -261,6 +268,17 @@ function findRecipesWithCheckedIngredients(selected) {
 
 //COOK MEAL
 
-function evaluateMeal() {
-  
+function evaluateMeal(event) {
+  const recipeId = parseInt(event.target.closest("section").id);
+  const recipeToAdd = recipeRepo.recipes.find(recipe => recipe.id === recipeId);
+  if (!user.pantry.checkIngredientsMeal(recipeToAdd)) {
+    const missingIngredients = user.pantry.findMissingIngredientsMeal(recipeToAdd);
+    const ingredientList = missingIngredients.map(i => {
+      const ingredient = ingredientsData.find(ingredient => {
+        return ingredient.id === i.ingredient
+      });
+      return `${ingredient.name} (${i.amount} ${i.unit})`
+    }).join(", ");
+    domUpdates.displayMissingIngredients(ingredientList, searchBtn)
+  }
 }

@@ -117,8 +117,10 @@ let domUpdates = {
       element.removeChild(element.firstChild));
     element.style.display = "none";
     element.innerHTML = `
-    <button class="add-button" id="addToList">Add to List to Cook</button>
-    <button class="add-button" id="cookMeal">Cook this Meal</button>
+    <div id="mealButtonWrapper">
+      <button class="add-button" id="addToList">Add to List to Cook</button>
+      <button class="add-button" id="cookMeal">Cook this Meal</button>
+    </div>
   `
     // document.getElementById("overlay").remove();
   },
@@ -184,9 +186,20 @@ let domUpdates = {
       <ol>${instructionsList}</ol>`
   },
 
+  displayMissingIngredients(missingIngredients, element) {
+    const missingIngredientMessage =
+    `
+      <h4>You need the following ingredients:</h4>
+        <p>${missingIngredients}</p>
+    `
+    console.log(element)
+    document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${missingIngredientMessage}`)
+  },
+
   displayRecipesToCook() {
 
   }
+
 
 }
 
