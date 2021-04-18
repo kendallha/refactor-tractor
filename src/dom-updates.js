@@ -85,6 +85,7 @@ let domUpdates = {
     domUpdates.showMyRecipesBanner();
   },
 
+
   generateRecipeTitle(recipe, ingredients, element, cost) {
     element.id = `${recipe.id}`;
     let recipeTitle = `

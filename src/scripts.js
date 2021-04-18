@@ -44,7 +44,7 @@ savedRecipesBtn.addEventListener("click", () => {
 });
 cookListButton.addEventListener("click", () => {
   domUpdates.showSavedRecipes("recipesToCook", recipeRepo.recipes, user);
-})
+});
 searchBtn.addEventListener("click", searchRecipes);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
@@ -177,7 +177,7 @@ function generateRecipeCost(recipe) {
 function addRecipeToList(e) {
   const recipeId = parseInt(e.target.closest("section").id);
   const recipeToAdd = recipeRepo.recipes.find(recipe => recipe.id === recipeId);
-  user.decideToCook(recipeToAdd);
+  user.decideToCook(recipeToAdd.id);
 }
 
 // SEARCH RECIPES
