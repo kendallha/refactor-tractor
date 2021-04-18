@@ -86,10 +86,11 @@ let domUpdates = {
   },
 
   generateRecipeTitle(recipe, ingredients, element, cost) {
+    element.id = `${recipe.id}`;
     let recipeTitle = `
       <button id="exit-recipe-btn">X</button>
-      <h3 id="recipe-title">${recipe.name}</h3>
-      <h4>Ingredients</h4>
+      <h3 class ="recipe-title" id="recipe-title">${recipe.name}</h3>
+      <h4 class="ingredients-label">Ingredients</h4>
       <p>${ingredients}</p>
       <h4>Cost</h4>
       <p>${cost}<p>`
@@ -114,6 +115,7 @@ let domUpdates = {
     while (element.firstChild &&
       element.removeChild(element.firstChild));
     element.style.display = "none";
+    element.innerHTML = `<button id="addToList">Add to List to Cook</button>`
     // document.getElementById("overlay").remove();
   },
 
@@ -150,12 +152,13 @@ let domUpdates = {
     domUpdates.showWelcomeBanner();
   },
 
-  displayPantryInfo(pantry) {
+  displayPantryInfo(pantry, element) {
     pantry.forEach(ingredient => {
-      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
+      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.id}">
         <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
-      document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
-        ingredientHtml);
+      // element.insertAdjacentHTML("beforeend",
+      //   ingredientHtml);
+      element.innerHTML += ingredientHtml;
     });
   },
 
@@ -172,9 +175,14 @@ let domUpdates = {
     instructions.forEach(i => {
       instructionsList += `<li>${i}</li>`
     });
-    element.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
-    element.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
+    element.innerHTML += `<h4>Instructions</h4>
+      <ol>${instructionsList}</ol>`
   },
+
+  displayRecipesToCook() {
+
+  }
+
 }
 
 export default domUpdates;
