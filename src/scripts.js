@@ -320,10 +320,10 @@ function removeFromPantry() {
       if (pantryItem.ingredient === ingredient) {
         changePantryIngredientAmount(user.id, ingredient, -(pantryItem.amount))
         pantryItem.amount = 0
-        console.log(pantryItem.amount)
       }
     })
   })
+  findPantryInfo()
   // selectedIngredients.forEach(ingredient => {
   //   user.pantry.pantryIngredients.forEach(pantryItem => {
   //     if(pantryItem.ingredient === ingredient) {
