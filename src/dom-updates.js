@@ -34,7 +34,7 @@ let domUpdates = {
 
   addToDom(recipeInfo, shortRecipeName, element) {
     let cardHtml = `
-      <div class="recipe-card" id=${recipeInfo.id}>
+      <article class="recipe-card" id=${recipeInfo.id}>
         <h3 maxlength="40">${shortRecipeName}</h3>
         <div class="card-photo-container">
           <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
@@ -44,13 +44,13 @@ let domUpdates = {
         </div>
         <h4>${recipeInfo.tags[0]}</h4>
         <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
-      </div>`
+      </article>`
     element.insertAdjacentHTML("beforeend", cardHtml);
   },
 
   listTags(allTags, element) {
     allTags.forEach(tag => {
-      let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
+      let tagHtml = `<li><input type="checkbox" class="checked-tag" role="checkbox" id="${tag}">
         <label for="${tag}">${domUpdates.capitalize(tag)}</label></li>`;
       element.insertAdjacentHTML("beforeend", tagHtml);
     });
@@ -155,7 +155,7 @@ let domUpdates = {
 
   displayPantryInfo(pantry, element) {
     pantry.forEach(ingredient => {
-      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.id}">
+      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" role="checkbox" id="${ingredient.id}">
         <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
       // element.insertAdjacentHTML("beforeend",
       //   ingredientHtml);
