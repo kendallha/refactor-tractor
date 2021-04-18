@@ -34,7 +34,7 @@ let domUpdates = {
 
   addToDom(recipeInfo, shortRecipeName, element) {
     let cardHtml = `
-      <div class="recipe-card" id=${recipeInfo.id}>
+      <article class="recipe-card" id=${recipeInfo.id}>
         <h3 maxlength="40">${shortRecipeName}</h3>
         <div class="card-photo-container">
           <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
@@ -44,7 +44,7 @@ let domUpdates = {
         </div>
         <h4>${recipeInfo.tags[0]}</h4>
         <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
-      </div>`
+      </article>`
     element.insertAdjacentHTML("beforeend", cardHtml);
   },
 
