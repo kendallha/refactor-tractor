@@ -21,6 +21,10 @@ let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let tagList = document.querySelector(".tag-list");
 let cookMealButton = document.querySelector("#cookMeal")
 let cookButtonWrapper = document.querySelector("#mealButtonWrapper")
+let removeFromPantryButton = document.querySelector("#removeFromPantry")
+let pantryIngredientInput = document.querySelector("#addIngredient")
+let pantryIngredientAmountInput = document.querySelector("#addAmount")
+let addToPantryButton = document.querySelector("#addToPantry")
 let user;
 let ingredientsData;
 let recipeRepo;
@@ -280,5 +284,11 @@ function evaluateMeal(event) {
       return `${ingredient.name} (${i.amount} ${i.unit})`
     }).join(", ");
     domUpdates.displayMissingIngredients(ingredientList, searchBtn)
+  } else {
+    removeCookingIngredients(recipeToAdd)
   }
+}
+
+function removeCookingIngredients(recipe) {
+  user.pantry.useIngredientsCookMeal(recipe)
 }
