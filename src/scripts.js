@@ -45,6 +45,7 @@ filterBtn.addEventListener("click", showFilteredRecipes);
 main.addEventListener("click", addToMyRecipes);
 pantryBtn.addEventListener("click", () => {
   domUpdates.toggleMenu(menuOpen);
+  findPantryInfo()
   menuOpen = !menuOpen;
 });
 savedRecipesBtn.addEventListener("click", () => {
@@ -56,11 +57,8 @@ cookListButton.addEventListener("click", () => {
 searchBtn.addEventListener("click", searchRecipes);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
-// cookMealButton.addEventListener("click", (e) => {
-//   if (e.target.id === "cookMeal") {
-//     evaluateMeal(e);
-//   }
-// })
+addToPantryButton.addEventListener("click", addToPantry)
+removeFromPantryButton.addEventListener("click", removeFromPantry)
 
 //ON LOAD HELPER FUNCTION
 function loadDOM([users, recipes, ingredients]) {
@@ -216,23 +214,34 @@ function filterNonSearched(filtered) {
 }
 
 // CREATE AND USE PANTRY
+// function findPantryInfo() {
+  // user.pantry.pantryIngredients.forEach(item => {
+  //   let itemInfo = ingredientsData.find(ingredient => {
+  //     return ingredient.id === item.ingredient;
+  //   });
+  //   let originalIngredient = pantryInfo.find(ingredient => {
+  //     if (itemInfo) {
+  //       return ingredient.name === itemInfo.name;
+  //     }
+  //   });
+  //   if (itemInfo && originalIngredient) {
+  //     originalIngredient.count += item.amount;
+  //   } else if (itemInfo) {
+  //     pantryInfo.push({name: itemInfo.name, id: itemInfo.id, count: item.amount});
+  //   }
+//   });
+//   domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)), pantrySection);
+// }
 function findPantryInfo() {
-  user.pantry.pantryIngredients.forEach(item => {
-    let itemInfo = ingredientsData.find(ingredient => {
-      return ingredient.id === item.ingredient;
-    });
-    let originalIngredient = pantryInfo.find(ingredient => {
-      if (itemInfo) {
-        return ingredient.name === itemInfo.name;
-      }
-    });
-    if (itemInfo && originalIngredient) {
-      originalIngredient.count += item.amount;
-    } else if (itemInfo) {
-      pantryInfo.push({name: itemInfo.name, id: itemInfo.id, count: item.amount});
+  let pantryItems = [];
+    user.pantry.pantryIngredients.forEach(pantryItem => {
+    	ingredientsData.forEach(ingredient => {
+    		if (ingredient.id === pantryItem.ingredient) {
+    			pantryItems.push({name: ingredient.name, id: ingredient.id, count: pantryItem.amount})
     }
-  });
-  domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)), pantrySection);
+  })
+    domUpdates.displayPantryInfo(pantryItems.sort((a, b) => a.name.localeCompare(b.name)), pantrySection);
+  })
 }
 
 function findCheckedPantryBoxes() {
@@ -291,4 +300,36 @@ function evaluateMeal(event) {
 
 function removeCookingIngredients(recipe) {
   user.pantry.useIngredientsCookMeal(recipe)
+}
+
+function removeFromPantry() {
+  let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
+  let pantryCheckboxInfo = Array.from(pantryCheckboxes)
+  console.log(pantryCheckboxInfo)
+  // let selectedIngredients = pantryCheckboxInfo.filter(box => {
+  //   return box.checked;
+  // })
+  let selectedIngredients = [];
+  pantryCheckboxInfo.forEach(box => {
+    if (box.checked) {
+      selectedIngredients.push(parseInt(box.id))
+    }
+  })
+  selectedIngredients.forEach(ingredient => {
+    user.pantry.pantryIngredients.forEach(pantryItem => {
+      if (pantryItem.ingredient === ingredient) {
+        changePantryIngredientAmount(user.id, ingredient, -(pantryItem.amount))
+        pantryItem.amount = 0
+        console.log(pantryItem.amount)
+      }
+    })
+  })
+  // selectedIngredients.forEach(ingredient => {
+  //   user.pantry.pantryIngredients.forEach(pantryItem => {
+  //     if(pantryItem.ingredient === ingredient) {
+  //       user.pantry
+  //     }
+  //   })
+    // console.log(user.pantry.pantryIngredients)
+  // })
 }

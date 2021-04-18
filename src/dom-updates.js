@@ -160,6 +160,7 @@ let domUpdates = {
   },
 
   displayPantryInfo(pantry, element) {
+    element.innerHTML = ''
     pantry.forEach(ingredient => {
       let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" role="checkbox" id="${ingredient.id}">
         <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
