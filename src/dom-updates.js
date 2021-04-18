@@ -50,7 +50,7 @@ let domUpdates = {
 
   listTags(allTags, element) {
     allTags.forEach(tag => {
-      let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
+      let tagHtml = `<li><input type="checkbox" class="checked-tag" role="checkbox" id="${tag}">
         <label for="${tag}">${domUpdates.capitalize(tag)}</label></li>`;
       element.insertAdjacentHTML("beforeend", tagHtml);
     });
@@ -154,7 +154,7 @@ let domUpdates = {
 
   displayPantryInfo(pantry, element) {
     pantry.forEach(ingredient => {
-      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.id}">
+      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" role="checkbox" id="${ingredient.id}">
         <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
       // element.insertAdjacentHTML("beforeend",
       //   ingredientHtml);
