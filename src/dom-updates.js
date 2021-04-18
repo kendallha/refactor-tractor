@@ -115,7 +115,10 @@ let domUpdates = {
     while (element.firstChild &&
       element.removeChild(element.firstChild));
     element.style.display = "none";
-    element.innerHTML = `<button id="addToList">Add to List to Cook</button>`
+    element.innerHTML = `
+    <button class="add-button" id="addToList">Add to List to Cook</button>
+    <button class="add-button" id="cookMeal">Cook this Meal</button>
+  `
     // document.getElementById("overlay").remove();
   },
 

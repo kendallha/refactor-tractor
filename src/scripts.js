@@ -175,7 +175,7 @@ function generateRecipeCost(recipe) {
 }
 
 function addRecipeToList(e) {
-  const recipeId = parseInt(e.target.closest("article").id);
+  const recipeId = parseInt(e.target.closest("section").id);
   const recipeToAdd = recipeRepo.recipes.find(recipe => recipe.id === recipeId);
   user.decideToCook(recipeToAdd);
 }
@@ -183,11 +183,12 @@ function addRecipeToList(e) {
 // SEARCH RECIPES
 function pressEnterSearch(event) {
   event.preventDefault();
+  // fullRecipeInfo.style.display = "none";
   searchRecipes();
 }
 
 function searchRecipes() {
-  domUpdates.showAllRecipes(recipeRepo.recipes);
+  domUpdates.showAllRecipes(recipeRepo.recipes, fullRecipeInfo);
   let searchedRecipes = recipeRepo.recipes.filter(recipe => {
     return recipe.name.toLowerCase().includes(searchInput.value.toLowerCase());
   });
