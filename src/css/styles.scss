@@ -191,7 +191,12 @@ header {
     margin: 1% 0%;
     padding: 1px 6px 5px 0px;
   }
-}
+
+  .cook-button {
+      width: 90%;
+      height: 65%;
+    }
+  }
 
 
 /* BANNER IMAGE*/
@@ -342,7 +347,7 @@ main {
   @include button-format;
 }
 
-.filter-btn {
+.filter-btn, .add-button {
   @include button-format;
 
   &:hover {
@@ -365,6 +370,14 @@ main {
   color: black;
   padding-left: 15px;
   text-align: left;
+}
+
+.add-ingredients-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 10%;
+  height: 15%;
 }
 
 
