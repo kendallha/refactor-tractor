@@ -18,6 +18,7 @@
         <button class="nav-btn search-btn" type="button" name="button"><img src="../images/search.png" alt="search button"></button>
       </form>
       <button class="nav-btn ing-pan-btn saved-recipes-btn" type="button" name="button"><img src="../images/cookbook.png" alt="search button">My Recipes</button>
+      <button class="nav-btn ing-pan-btn cook-recipes-btn" type="button" name="button"><img class="cook-button" src="../images/cooking-pot.png" alt="search button">My List to Cook</button>
       <button class="nav-btn my-pantry-btn ing-pan-btn saved-ingredients-btn" type="button" name="button"><img src="../images/seasoning.png" alt="search button">My Pantry</button>
     </header>
     <section class="banner-image">
@@ -30,6 +31,12 @@
       <h2>My Pantry</h2>
       <button class="show-pantry-recipes-btn">What Can I Make?</button>
       <ul class="pantry-list"></ul>
+      <button class="add-button" id="removeFromPantry">Remove From Pantry</button>
+      <div class="add-ingredients-section">
+        <input type=text class="add-pantry" id="addIngredient" placeholder="Ingredient"></input>
+        <input type=text class="add-pantry" id="addAmount" placeholder="Amount"></input>
+        <button class="add-button" id="addToPantry">Add to Pantry</button>
+      </div>
     </div>
     <aside>
       <div class="wrap">
@@ -41,8 +48,8 @@
     </aside>
     <main>
       <div class="recipe-instructions">
-        <button id="addToList">Add to List to Cook</button>
-        <button id="cookMeal">Cook this Meal</button>
+        <button class="add-button" id="addToList">Add to List to Cook</button>
+        <button class="add-button" id="cookMeal">Cook this Meal</button>
       </div>
       <div class="my-recipes-banner">
         <h1>My Recipes</h1>
