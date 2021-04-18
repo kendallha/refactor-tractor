@@ -13,11 +13,13 @@ let menuOpen = false;
 let pantryBtn = document.querySelector(".my-pantry-btn");
 let pantryInfo = [];
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
+let cookListButton = document.querySelector("#cookButton");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let tagList = document.querySelector(".tag-list");
+let cookMealButton = document.querySelector("#cookMeal")
 let user;
 let ingredientsData;
 let recipeRepo;
@@ -29,7 +31,7 @@ fullRecipeInfo.addEventListener("click", (e) => {
   }
 });
 allRecipesBtn.addEventListener("click", () => {
-   domUpdates.showAllRecipes(recipeRepo.recipes);
+   domUpdates.showAllRecipes(recipeRepo.recipes, fullRecipeInfo);
 });
 filterBtn.addEventListener("click", showFilteredRecipes);
 main.addEventListener("click", addToMyRecipes);
@@ -38,11 +40,15 @@ pantryBtn.addEventListener("click", () => {
   menuOpen = !menuOpen;
 });
 savedRecipesBtn.addEventListener("click", () => {
-  domUpdates.showSavedRecipes(recipeRepo.recipes, user);
+  domUpdates.showSavedRecipes("favoriteRecipes", recipeRepo.recipes, user);
 });
+cookListButton.addEventListener("click", () => {
+  domUpdates.showSavedRecipes("recipesToCook", recipeRepo.recipes, user);
+})
 searchBtn.addEventListener("click", searchRecipes);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("submit", pressEnterSearch);
+cookMealButton.addEventListener("click", evaluateMeal);
 
 
 //ON LOAD HELPER FUNCTION
@@ -171,9 +177,7 @@ function generateRecipeCost(recipe) {
 function addRecipeToList(e) {
   const recipeId = parseInt(e.target.closest("div").id);
   const recipeToAdd = recipeRepo.recipes.find(recipe => recipe.id === recipeId);
-  console.log(recipeId);
   user.decideToCook(recipeToAdd);
-  console.log(user.recipesToCook);
 }
 
 // SEARCH RECIPES
@@ -252,4 +256,10 @@ function findRecipesWithCheckedIngredients(selected) {
       domUpdates.hideRecipes(recipe.id);
     }
   })
+}
+
+//COOK MEAL
+
+function evaluateMeal() {
+  
 }

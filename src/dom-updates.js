@@ -74,9 +74,9 @@ let domUpdates = {
   })
   },
 
-  showSavedRecipes(recipes, user) {
+  showSavedRecipes(list, recipes, user) {
     let unsavedRecipes = recipes.filter(recipe => {
-      return !user.favoriteRecipes.includes(recipe.id);
+      return !user[list].includes(recipe.id);
     });
     unsavedRecipes.forEach(recipe => {
       let domRecipe = document.getElementById(`${recipe.id}`);
@@ -144,11 +144,12 @@ let domUpdates = {
     domRecipe.style.display = "none";
   },
 
-  showAllRecipes(recipes) {
+  showAllRecipes(recipes, element) {
     recipes.forEach(recipe => {
       let domRecipe = document.getElementById(`${recipe.id}`);
       domRecipe.style.display = "block";
     });
+    element.style.display = "none";
     domUpdates.showWelcomeBanner();
   },
 
