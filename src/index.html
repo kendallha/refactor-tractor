@@ -18,12 +18,12 @@
         <button class="nav-btn search-btn" type="button" name="button"><img src="../images/search.png" alt="search button"></button>
       </form>
       <button class="nav-btn ing-pan-btn saved-recipes-btn" type="button" name="button"><img src="../images/cookbook.png" alt="search button">My Recipes</button>
-      <button class="nav-btn ing-pan-btn cook-recipes-btn" type="button" name="button"><img class="cook-button" src="../images/cooking-pot.png" alt="search button">My List to Cook</button>
+      <button id="cookButton" class="nav-btn ing-pan-btn cook-recipes-btn" type="button" name="button"><img class="cook-button" src="../images/cooking-pot.png" alt="search button">My List to Cook</button>
       <button class="nav-btn my-pantry-btn ing-pan-btn saved-ingredients-btn" type="button" name="button"><img src="../images/seasoning.png" alt="search button">My Pantry</button>
     </header>
     <section class="banner-image">
       <div class="my-recipes-banner">
-        <h1>My Recipes</h1>
+        <h1 id="myRecipes">My Recipes</h1>
         <button class="show-all-btn">Show All Recipes</button>
       </div>
     </section>
@@ -50,8 +50,10 @@
     </aside>
     <main>
       <section class="recipe-instructions">
-        <button class="add-button" id="addToList">Add to List to Cook</button>
-        <button class="add-button" id="cookMeal">Cook this Meal</button>
+        <div id="mealButtonWrapper">
+          <button class="add-button" id="addToList">Add to List to Cook</button>
+          <button class="add-button" id="cookMeal">Cook this Meal</button>
+        </div>
       </section>
       <div class="my-recipes-banner">
         <h1>My Recipes</h1>

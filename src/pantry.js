@@ -14,11 +14,11 @@ class Pantry {
     const missingItems = [];
     recipe.ingredients.forEach(ingredient => {
       if (!this.pantryIngredients.find(pantryItem => (pantryItem.ingredient === ingredient.id))) {
-        missingItems.push({ingredient: ingredient.name, amount: ingredient.quantity.amount});
+        missingItems.push({ingredient: ingredient.id, amount: ingredient.quantity.amount, unit: ingredient.quantity.unit});
       }
       this.pantryIngredients.forEach(pantryItem => {
         if ((pantryItem.ingredient === ingredient.id) && (pantryItem.amount < ingredient.quantity.amount))
-        missingItems.push({ingredient: ingredient.name, amount: ingredient.quantity.amount - pantryItem.amount})
+        missingItems.push({ingredient: ingredient.id, amount: ingredient.quantity.amount - pantryItem.amount, unit: ingredient.quantity.unit})
       }
     )})
     return missingItems;
@@ -32,7 +32,7 @@ class Pantry {
           if (pantryItem.ingredient === ingredient.id) {
             pantryItem.amount = pantryItem.amount - ingredient.quantity.amount
           }
-        
+
         } ))
       })
     }

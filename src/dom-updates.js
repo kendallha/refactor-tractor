@@ -74,9 +74,9 @@ let domUpdates = {
   })
   },
 
-  showSavedRecipes(recipes, user) {
+  showSavedRecipes(list, recipes, user) {
     let unsavedRecipes = recipes.filter(recipe => {
-      return !user.favoriteRecipes.includes(recipe.id);
+      return !user[list].includes(recipe.id);
     });
     unsavedRecipes.forEach(recipe => {
       let domRecipe = document.getElementById(`${recipe.id}`);
@@ -85,10 +85,11 @@ let domUpdates = {
     domUpdates.showMyRecipesBanner();
   },
 
+
   generateRecipeTitle(recipe, ingredients, element, cost) {
     element.id = `${recipe.id}`;
+    element.insertAdjacentHTML('afterbegin', '<button id="exit-recipe-btn">X</button>')
     let recipeTitle = `
-      <button id="exit-recipe-btn">X</button>
       <h3 class ="recipe-title" id="recipe-title">${recipe.name}</h3>
       <h4 class="ingredients-label">Ingredients</h4>
       <p>${ingredients}</p>
@@ -115,7 +116,12 @@ let domUpdates = {
     while (element.firstChild &&
       element.removeChild(element.firstChild));
     element.style.display = "none";
-    element.innerHTML = `<button id="addToList">Add to List to Cook</button>`
+    element.innerHTML = `
+    <div id="mealButtonWrapper">
+      <button class="add-button" id="addToList">Add to List to Cook</button>
+      <button class="add-button" id="cookMeal">Cook this Meal</button>
+    </div>
+  `
     // document.getElementById("overlay").remove();
   },
 
@@ -144,15 +150,17 @@ let domUpdates = {
     domRecipe.style.display = "none";
   },
 
-  showAllRecipes(recipes) {
+  showAllRecipes(recipes, element) {
     recipes.forEach(recipe => {
       let domRecipe = document.getElementById(`${recipe.id}`);
       domRecipe.style.display = "block";
     });
+    element.style.display = "none";
     domUpdates.showWelcomeBanner();
   },
 
   displayPantryInfo(pantry, element) {
+    element.innerHTML = ''
     pantry.forEach(ingredient => {
       let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" role="checkbox" id="${ingredient.id}">
         <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
@@ -179,9 +187,20 @@ let domUpdates = {
       <ol>${instructionsList}</ol>`
   },
 
+  displayMissingIngredients(missingIngredients, element) {
+    const missingIngredientMessage =
+    `
+      <h4>You need the following ingredients:</h4>
+        <p>${missingIngredients}</p>
+    `
+    console.log(element)
+    document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${missingIngredientMessage}`)
+  },
+
   displayRecipesToCook() {
 
   }
+
 
 }
 
