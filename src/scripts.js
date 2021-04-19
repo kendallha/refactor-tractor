@@ -239,7 +239,7 @@ function findCheckedPantryBoxes() {
       selectedIngredients.push(box.id)
     }
   })
-  domUpdates.showAllRecipes(recipeRepo.recipes);
+  domUpdates.showAllRecipes(recipeRepo.recipes, );
   if (selectedIngredients.length > 0) {
     findRecipesWithCheckedIngredients(selectedIngredients);
   }
@@ -332,14 +332,11 @@ function addToPantry() {
   user.pantry.pantryIngredients.forEach(ingredient => {
     if (ingredient.ingredient === foundIngredient.id) {
       changePantryIngredientAmount(user.id, ingredient.ingredient, amountInput, () => {updatePantryAddQuantity(ingredient, amountInput)})
-      // ingredient.amount += amountInput
     }
   })
   if (!user.pantry.pantryIngredients.some(ingredient => ingredient.ingredient === foundIngredient.id)) {
     changePantryIngredientAmount(user.id, foundIngredient.id, amountInput, () => {updatePantryAddIngredients(foundIngredient, amountInput)})
-    // user.pantry.pantryIngredients.push({ingredient: foundIngredient.id, amount: amountInput})
   }
-  // findPantryInfo()
 }
 
 function updatePantryAddQuantity(ingredient, amountInput) {
