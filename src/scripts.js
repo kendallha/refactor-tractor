@@ -37,7 +37,10 @@ fullRecipeInfo.addEventListener("click", (e) => {
   if (e.target.id === "cookMeal") {
     evaluateMeal(e);
   }
-});
+  if (e.target.id === "okButton") {
+    domUpdates.closeCookMealMessage();
+  }
+})
 allRecipesBtn.addEventListener("click", () => {
    domUpdates.showAllRecipes(recipeRepo.recipes, fullRecipeInfo);
 });
@@ -168,7 +171,6 @@ function openRecipeInfo(event) {
   domUpdates.generateRecipeTitle(recipe, generateIngredients(recipe), fullRecipeInfo, generateRecipeCost(recipe));
    domUpdates.addRecipeImage(recipe);
   domUpdates.displayRecipeInstructions(recipe, fullRecipeInfo);
-  //domUpdates.displayRecipeInfo(fullRecipeInfo);
 }
 
 function generateIngredients(recipe) {
@@ -214,24 +216,7 @@ function filterNonSearched(filtered) {
 }
 
 // CREATE AND USE PANTRY
-// function findPantryInfo() {
-  // user.pantry.pantryIngredients.forEach(item => {
-  //   let itemInfo = ingredientsData.find(ingredient => {
-  //     return ingredient.id === item.ingredient;
-  //   });
-  //   let originalIngredient = pantryInfo.find(ingredient => {
-  //     if (itemInfo) {
-  //       return ingredient.name === itemInfo.name;
-  //     }
-  //   });
-  //   if (itemInfo && originalIngredient) {
-  //     originalIngredient.count += item.amount;
-  //   } else if (itemInfo) {
-  //     pantryInfo.push({name: itemInfo.name, id: itemInfo.id, count: item.amount});
-  //   }
-//   });
-//   domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)), pantrySection);
-// }
+
 function findPantryInfo() {
   let pantryItems = [];
     user.pantry.pantryIngredients.forEach(pantryItem => {
@@ -294,12 +279,21 @@ function evaluateMeal(event) {
     }).join(", ");
     domUpdates.displayMissingIngredients(ingredientList, searchBtn)
   } else {
-    removeCookingIngredients(recipeToAdd)
+    removeCookingIngredients(recipeToAdd);
+    domUpdates.displayCookingSuccessMessage();
   }
 }
 
 function removeCookingIngredients(recipe) {
-  user.pantry.useIngredientsCookMeal(recipe)
+  user.pantry.useIngredientsCookMeal(recipe);
+  recipe.ingredients.forEach(ingredient => {
+    user.pantry.pantryIngredients.forEach(pantryItem => {
+    if (ingredient.id === pantryItem.ingredient) {
+      changePantryIngredientAmount(user.id, ingredient.id, -(ingredient.quantity.amount));
+    }
+  })
+})
+  findPantryInfo();
 }
 
 function removeFromPantry() {
