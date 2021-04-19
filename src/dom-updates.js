@@ -164,8 +164,6 @@ let domUpdates = {
     pantry.forEach(ingredient => {
       let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" role="checkbox" id="${ingredient.id}">
         <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
-      // element.insertAdjacentHTML("beforeend",
-      //   ingredientHtml);
       element.innerHTML += ingredientHtml;
     });
   },
@@ -190,24 +188,28 @@ let domUpdates = {
   displayMissingIngredients(missingIngredients, element) {
     const missingIngredientMessage =
     `
-      <h4>You need the following ingredients:</h4>
+      <div id="cookMessage">
+        <h4>You need the following ingredients:</h4>
         <p>${missingIngredients}</p>
         <button class="add-button" id="okButton">Clear Message</button>
+       </div>
     `
-    console.log(element)
     document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${missingIngredientMessage}`)
   },
 
-  displayCookingSuccessMessage(element) {
+  displayCookingSuccessMessage() {
     const successMessage =
-    `
-      <h4>You cooked this meal! The items have been removed from your pantry.</h4>
-      <button class="add-button" id="okButton">Clear Message</button>
+    `<div id="cookMessage">
+        <h4>You cooked this meal! The items have been removed from your pantry.</h4>
+        <button class="add-button" id="okButton">Clear Message</button>
+      </div>
     `
     document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${successMessage}`)
+  },
+
+  closeCookMealMessage() {
+    document.getElementById("cookMessage").innerHTML = ``;
   }
-
-
 }
 
 export default domUpdates;

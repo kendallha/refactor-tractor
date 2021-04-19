@@ -37,7 +37,10 @@ fullRecipeInfo.addEventListener("click", (e) => {
   if (e.target.id === "cookMeal") {
     evaluateMeal(e);
   }
-});
+  if (e.target.id === "okButton") {
+    domUpdates.closeCookMealMessage();
+  }
+})
 allRecipesBtn.addEventListener("click", () => {
    domUpdates.showAllRecipes(recipeRepo.recipes, fullRecipeInfo);
 });
@@ -168,7 +171,6 @@ function openRecipeInfo(event) {
   domUpdates.generateRecipeTitle(recipe, generateIngredients(recipe), fullRecipeInfo, generateRecipeCost(recipe));
    domUpdates.addRecipeImage(recipe);
   domUpdates.displayRecipeInstructions(recipe, fullRecipeInfo);
-  //domUpdates.displayRecipeInfo(fullRecipeInfo);
 }
 
 function generateIngredients(recipe) {
@@ -277,7 +279,8 @@ function evaluateMeal(event) {
     }).join(", ");
     domUpdates.displayMissingIngredients(ingredientList, searchBtn)
   } else {
-    removeCookingIngredients(recipeToAdd)
+    removeCookingIngredients(recipeToAdd);
+    domUpdates.displayCookingSuccessMessage();
   }
 }
 
@@ -287,7 +290,6 @@ function removeCookingIngredients(recipe) {
     user.pantry.pantryIngredients.forEach(pantryItem => {
     if (ingredient.id === pantryItem.ingredient) {
       changePantryIngredientAmount(user.id, ingredient.id, -(ingredient.quantity.amount));
-      
     }
   })
 })
