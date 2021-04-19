@@ -214,24 +214,7 @@ function filterNonSearched(filtered) {
 }
 
 // CREATE AND USE PANTRY
-// function findPantryInfo() {
-  // user.pantry.pantryIngredients.forEach(item => {
-  //   let itemInfo = ingredientsData.find(ingredient => {
-  //     return ingredient.id === item.ingredient;
-  //   });
-  //   let originalIngredient = pantryInfo.find(ingredient => {
-  //     if (itemInfo) {
-  //       return ingredient.name === itemInfo.name;
-  //     }
-  //   });
-  //   if (itemInfo && originalIngredient) {
-  //     originalIngredient.count += item.amount;
-  //   } else if (itemInfo) {
-  //     pantryInfo.push({name: itemInfo.name, id: itemInfo.id, count: item.amount});
-  //   }
-//   });
-//   domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)), pantrySection);
-// }
+
 function findPantryInfo() {
   let pantryItems = [];
     user.pantry.pantryIngredients.forEach(pantryItem => {
@@ -299,7 +282,16 @@ function evaluateMeal(event) {
 }
 
 function removeCookingIngredients(recipe) {
-  user.pantry.useIngredientsCookMeal(recipe)
+  user.pantry.useIngredientsCookMeal(recipe);
+  recipe.ingredients.forEach(ingredient => {
+    user.pantry.pantryIngredients.forEach(pantryItem => {
+    if (ingredient.id === pantryItem.ingredient) {
+      changePantryIngredientAmount(user.id, ingredient.id, -(ingredient.quantity.amount));
+      
+    }
+  })
+})
+  findPantryInfo();
 }
 
 function removeFromPantry() {

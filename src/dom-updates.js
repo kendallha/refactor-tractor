@@ -192,13 +192,19 @@ let domUpdates = {
     `
       <h4>You need the following ingredients:</h4>
         <p>${missingIngredients}</p>
+        <button class="add-button" id="okButton">Clear Message</button>
     `
     console.log(element)
     document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${missingIngredientMessage}`)
   },
 
-  displayRecipesToCook() {
-
+  displayCookingSuccessMessage(element) {
+    const successMessage =
+    `
+      <h4>You cooked this meal! The items have been removed from your pantry.</h4>
+      <button class="add-button" id="okButton">Clear Message</button>
+    `
+    document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${successMessage}`)
   }
 
 
