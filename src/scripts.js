@@ -77,21 +77,18 @@ function loadDataFromAPI() {
   const usersPromise = fetch("http://localhost:3001/api/v1/users")
     .then(response => response.json())
     .then(data => data)
-    .catch(error => console.log(error));
 
   const recipesPromise = fetch("http://localhost:3001/api/v1/recipes")
     .then(response => response.json())
     .then(data => data)
-    .catch(error => console.log(error));
 
   const ingredientsPromise = fetch("http://localhost:3001/api/v1/ingredients")
     .then(response => response.json())
     .then(data => data)
-    .catch(error => console.log(error));
 
   Promise.all([usersPromise, recipesPromise, ingredientsPromise])
     .then(data => loadDOM(data))
-    .catch(error => console.log(error));
+    .catch(error => domUpdates.displayGetError(error));
 }
 
 // GENERATE A USER ON LOAD
@@ -102,7 +99,7 @@ function generateUser(users) {
 }
 
 // POST FETCH REQUEST
-function changePantryIngredientAmount(userId, ingredientId, ingredientAmount) {
+function changePantryIngredientAmount(userId, ingredientId, ingredientAmount, functionToExecute) {
   fetch("http://localhost:3001/api/v1/users", {
     method: "POST",
     body: JSON.stringify({
@@ -115,8 +112,9 @@ function changePantryIngredientAmount(userId, ingredientId, ingredientAmount) {
     }
   })
     .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.log(error))
+    .then(data => console.log("post finished"))
+    .then(data => functionToExecute())
+    .catch(error => domUpdates.displayGetError(error, fullRecipeInfo))
 }
 
 // FILTER BY RECIPE TAGS
@@ -241,8 +239,7 @@ function findCheckedPantryBoxes() {
       selectedIngredients.push(box.id)
     }
   })
-  console.log(selectedIngredients);
-  domUpdates.showAllRecipes(recipeRepo.recipes);
+  domUpdates.showAllRecipes(recipeRepo.recipes, );
   if (selectedIngredients.length > 0) {
     findRecipesWithCheckedIngredients(selectedIngredients);
   }
@@ -285,14 +282,17 @@ function evaluateMeal(event) {
 }
 
 function removeCookingIngredients(recipe) {
-  user.pantry.useIngredientsCookMeal(recipe);
   recipe.ingredients.forEach(ingredient => {
     user.pantry.pantryIngredients.forEach(pantryItem => {
-    if (ingredient.id === pantryItem.ingredient) {
-      changePantryIngredientAmount(user.id, ingredient.id, -(ingredient.quantity.amount));
-    }
+      if (ingredient.id === pantryItem.ingredient) {
+        changePantryIngredientAmount(user.id, ingredient.id, -ingredient.quantity.amount, () => {updatePantryAfterCooking(recipe)});
+      }
+    })
   })
-})
+}
+
+function updatePantryAfterCooking(recipe) {
+  user.pantry.useIngredientsCookMeal(recipe);
   findPantryInfo();
 }
 
@@ -308,12 +308,21 @@ function removeFromPantry() {
   selectedIngredients.forEach(ingredient => {
     user.pantry.pantryIngredients.forEach(pantryItem => {
       if (pantryItem.ingredient === ingredient) {
-        changePantryIngredientAmount(user.id, ingredient, -(pantryItem.amount))
+        changePantryIngredientAmount(user.id, ingredient, -pantryItem.amount, () => {updatePantryRemovingIngredients(selectedIngredients)});
+      }
+    })
+  })
+}
+
+function updatePantryRemovingIngredients(selectedIngredients) {
+  selectedIngredients.forEach(ingredient => {
+    user.pantry.pantryIngredients.forEach(pantryItem => {
+      if (pantryItem.ingredient === ingredient) {
         pantryItem.amount = 0
       }
     })
   })
-  findPantryInfo()
+  findPantryInfo();
 }
 
 function addToPantry() {
@@ -322,14 +331,22 @@ function addToPantry() {
   const foundIngredient = ingredientsData.find(ingredient => ingredient.name === ingredientInput)
   user.pantry.pantryIngredients.forEach(ingredient => {
     if (ingredient.ingredient === foundIngredient.id) {
-      changePantryIngredientAmount(user.id, ingredient.ingredient, amountInput)
-      ingredient.amount += amountInput
+      changePantryIngredientAmount(user.id, ingredient.ingredient, amountInput, () => {updatePantryAddQuantity(ingredient, amountInput)})
     }
   })
   if (!user.pantry.pantryIngredients.some(ingredient => ingredient.ingredient === foundIngredient.id)) {
-    console.log(foundIngredient.id)
-    changePantryIngredientAmount(user.id, foundIngredient.id, amountInput)
-    user.pantry.pantryIngredients.push({ingredient: foundIngredient.id, amount: amountInput})
+    changePantryIngredientAmount(user.id, foundIngredient.id, amountInput, () => {updatePantryAddIngredients(foundIngredient, amountInput)})
   }
+}
+
+function updatePantryAddQuantity(ingredient, amountInput) {
+  console.log(ingredient);
+  ingredient.amount += amountInput;
+  findPantryInfo();
+}
+
+function updatePantryAddIngredients(foundIngredient, amountInput) {
+  console.log(foundIngredient);
+  user.pantry.pantryIngredients.push({ingredient: foundIngredient.id, amount: amountInput})
   findPantryInfo()
 }

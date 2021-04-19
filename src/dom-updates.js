@@ -209,7 +209,29 @@ let domUpdates = {
 
   closeCookMealMessage() {
     document.getElementById("cookMessage").innerHTML = ``;
+  },
+
+  displayGetError(error, element) {
+    let errorMsg = `
+      <div class="error-msg welcome-msg">
+        <h1>Oh no! Something went wrong, please try again!</h1>
+      </div>`;
+    document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
+      errorMsg);
+    element.style.display = "none";
+  },
+
+  displayCookErrorMsg() {
+    const errorMessage =
+    `<div id="cookMessage">
+        <h4>Sorry, we were unable to update your pantry!</h4>
+        <button class="add-button" id="okButton">Clear Message</button>
+      </div>
+    `
+    document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${errorMessage}`)
   }
+
+
 }
 
 export default domUpdates;
