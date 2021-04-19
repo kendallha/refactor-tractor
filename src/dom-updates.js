@@ -218,9 +218,19 @@ let domUpdates = {
       </div>`;
     document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
       errorMsg);
+  },
+
+  displayCookErrorMsg() {
+    const errorMessage =
+    `<div id="cookMessage">
+        <h4>Sorry, we were unable to update your pantry!</h4>
+        <button class="add-button" id="okButton">Clear Message</button>
+      </div>
+    `
+    document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${errorMessage}`)
   }
 
-  
+
 }
 
 export default domUpdates;
