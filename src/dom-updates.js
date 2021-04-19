@@ -211,7 +211,7 @@ let domUpdates = {
     document.getElementById("cookMessage").innerHTML = ``;
   },
 
-  displayFetchError(error) {
+  displayGetError(error) {
     let errorMsg = `
       <div class="error-msg welcome-msg">
         <h1>Oh no! Something went wrong, please try again!</h1>
@@ -219,6 +219,8 @@ let domUpdates = {
     document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
       errorMsg);
   }
+
+  
 }
 
 export default domUpdates;

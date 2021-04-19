@@ -88,7 +88,7 @@ function loadDataFromAPI() {
 
   Promise.all([usersPromise, recipesPromise, ingredientsPromise])
     .then(data => loadDOM(data))
-    .catch(error => domUpdates.displayFetchError(error));
+    .catch(error => domUpdates.displayGetError(error));
 }
 
 // GENERATE A USER ON LOAD
@@ -99,7 +99,7 @@ function generateUser(users) {
 }
 
 // POST FETCH REQUEST
-function changePantryIngredientAmount(userId, ingredientId, ingredientAmount) {
+function changePantryIngredientAmount(userId, ingredientId, ingredientAmount, functionToExecute) {
   fetch("http://localhost:3001/api/v1/users", {
     method: "POST",
     body: JSON.stringify({
@@ -112,7 +112,7 @@ function changePantryIngredientAmount(userId, ingredientId, ingredientAmount) {
     }
   })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => functionToExecute)
     .catch(error => console.log(error))
 }
 
@@ -282,14 +282,17 @@ function evaluateMeal(event) {
 }
 
 function removeCookingIngredients(recipe) {
-  user.pantry.useIngredientsCookMeal(recipe);
   recipe.ingredients.forEach(ingredient => {
     user.pantry.pantryIngredients.forEach(pantryItem => {
-    if (ingredient.id === pantryItem.ingredient) {
-      changePantryIngredientAmount(user.id, ingredient.id, -(ingredient.quantity.amount));
-    }
+      if (ingredient.id === pantryItem.ingredient) {
+        changePantryIngredientAmount(user.id, ingredient.id, -(ingredient.quantity.amount, updatePantryAfterCooking(recipe)));
+      }
+    })
   })
-})
+}
+
+function updatePantryAfterCooking(recipe) {
+  user.pantry.useIngredientsCookMeal(recipe);
   findPantryInfo();
 }
 
@@ -324,7 +327,6 @@ function addToPantry() {
     }
   })
   if (!user.pantry.pantryIngredients.some(ingredient => ingredient.ingredient === foundIngredient.id)) {
-    console.log(foundIngredient.id)
     changePantryIngredientAmount(user.id, foundIngredient.id, amountInput)
     user.pantry.pantryIngredients.push({ingredient: foundIngredient.id, amount: amountInput})
   }
