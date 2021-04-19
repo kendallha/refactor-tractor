@@ -113,7 +113,7 @@ function changePantryIngredientAmount(userId, ingredientId, ingredientAmount, fu
   })
     .then(response => response.json())
     .then(data => console.log("post finished"))
-    .then(data => functionToExecute)
+    .then(data => functionToExecute())
     .catch(error => domUpdates.displayGetError(error, fullRecipeInfo))
 }
 
@@ -239,7 +239,6 @@ function findCheckedPantryBoxes() {
       selectedIngredients.push(box.id)
     }
   })
-  console.log(selectedIngredients);
   domUpdates.showAllRecipes(recipeRepo.recipes);
   if (selectedIngredients.length > 0) {
     findRecipesWithCheckedIngredients(selectedIngredients);
@@ -332,20 +331,20 @@ function addToPantry() {
   const foundIngredient = ingredientsData.find(ingredient => ingredient.name === ingredientInput)
   user.pantry.pantryIngredients.forEach(ingredient => {
     if (ingredient.ingredient === foundIngredient.id) {
-      changePantryIngredientAmount(user.id, ingredient.ingredient, amountInput)
-      ingredient.amount += amountInput
+      changePantryIngredientAmount(user.id, ingredient.ingredient, amountInput, () => {updatePantryAddQuantity(ingredient, amountInput)})
+      // ingredient.amount += amountInput
     }
   })
   if (!user.pantry.pantryIngredients.some(ingredient => ingredient.ingredient === foundIngredient.id)) {
-    changePantryIngredientAmount(user.id, foundIngredient.id, amountInput)
-    user.pantry.pantryIngredients.push({ingredient: foundIngredient.id, amount: amountInput})
+    changePantryIngredientAmount(user.id, foundIngredient.id, amountInput, () => {updatePantryAddIngredients(foundIngredient, amountInput)})
+    // user.pantry.pantryIngredients.push({ingredient: foundIngredient.id, amount: amountInput})
   }
-  findPantryInfo()
+  // findPantryInfo()
 }
 
 function updatePantryAddQuantity(ingredient, amountInput) {
   console.log(ingredient);
-  user.pantry.pantryIngredients[ingredient].amount += amountInput;
+  ingredient.amount += amountInput;
   findPantryInfo();
 }
 
