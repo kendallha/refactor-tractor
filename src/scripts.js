@@ -305,10 +305,6 @@ function removeCookingIngredients(recipe) {
 function removeFromPantry() {
   let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
   let pantryCheckboxInfo = Array.from(pantryCheckboxes)
-  console.log(pantryCheckboxInfo)
-  // let selectedIngredients = pantryCheckboxInfo.filter(box => {
-  //   return box.checked;
-  // })
   let selectedIngredients = [];
   pantryCheckboxInfo.forEach(box => {
     if (box.checked) {
@@ -324,12 +320,22 @@ function removeFromPantry() {
     })
   })
   findPantryInfo()
-  // selectedIngredients.forEach(ingredient => {
-  //   user.pantry.pantryIngredients.forEach(pantryItem => {
-  //     if(pantryItem.ingredient === ingredient) {
-  //       user.pantry
-  //     }
-  //   })
-    // console.log(user.pantry.pantryIngredients)
-  // })
+}
+
+function addToPantry() {
+  const ingredientInput = pantryIngredientInput.value.toLowerCase()
+  const amountInput = parseInt(pantryIngredientAmountInput.value)
+  const foundIngredient = ingredientsData.find(ingredient => ingredient.name === ingredientInput)
+  user.pantry.pantryIngredients.forEach(ingredient => {
+    if (ingredient.ingredient === foundIngredient.id) {
+      changePantryIngredientAmount(user.id, ingredient.ingredient, amountInput)
+      ingredient.amount += amountInput
+    }
+  })
+  if (!user.pantry.pantryIngredients.some(ingredient => ingredient.ingredient === foundIngredient.id)) {
+    console.log(foundIngredient.id)
+    changePantryIngredientAmount(user.id, foundIngredient.id, amountInput)
+    user.pantry.pantryIngredients.push({ingredient: foundIngredient.id, amount: amountInput})
+  }
+  findPantryInfo()
 }
