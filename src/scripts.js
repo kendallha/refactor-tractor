@@ -77,21 +77,18 @@ function loadDataFromAPI() {
   const usersPromise = fetch("http://localhost:3001/api/v1/users")
     .then(response => response.json())
     .then(data => data)
-    .catch(error => console.log(error));
 
   const recipesPromise = fetch("http://localhost:3001/api/v1/recipes")
     .then(response => response.json())
     .then(data => data)
-    .catch(error => console.log(error));
 
   const ingredientsPromise = fetch("http://localhost:3001/api/v1/ingredients")
     .then(response => response.json())
     .then(data => data)
-    .catch(error => console.log(error));
 
   Promise.all([usersPromise, recipesPromise, ingredientsPromise])
     .then(data => loadDOM(data))
-    .catch(error => console.log(error));
+    .catch(error => domUpdates.displayFetchError(error));
 }
 
 // GENERATE A USER ON LOAD

@@ -209,6 +209,15 @@ let domUpdates = {
 
   closeCookMealMessage() {
     document.getElementById("cookMessage").innerHTML = ``;
+  },
+
+  displayFetchError(error) {
+    let errorMsg = `
+      <div class="error-msg welcome-msg">
+        <h1>Oh no! Something went wrong, please try again!</h1>
+      </div>`;
+    document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
+      errorMsg);
   }
 }
 
