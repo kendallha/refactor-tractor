@@ -112,6 +112,7 @@ function changePantryIngredientAmount(userId, ingredientId, ingredientAmount, fu
     }
   })
     .then(response => response.json())
+    .then(data => console.log("post finished"))
     .then(data => functionToExecute)
     .catch(error => console.log(error))
 }
@@ -285,7 +286,7 @@ function removeCookingIngredients(recipe) {
   recipe.ingredients.forEach(ingredient => {
     user.pantry.pantryIngredients.forEach(pantryItem => {
       if (ingredient.id === pantryItem.ingredient) {
-        changePantryIngredientAmount(user.id, ingredient.id, -(ingredient.quantity.amount, updatePantryAfterCooking(recipe)));
+        changePantryIngredientAmount(user.id, ingredient.id, -ingredient.quantity.amount, () => {updatePantryAfterCooking(recipe)});
       }
     })
   })
@@ -308,12 +309,22 @@ function removeFromPantry() {
   selectedIngredients.forEach(ingredient => {
     user.pantry.pantryIngredients.forEach(pantryItem => {
       if (pantryItem.ingredient === ingredient) {
-        changePantryIngredientAmount(user.id, ingredient, -(pantryItem.amount))
+        changePantryIngredientAmount(user.id, ingredient, -pantryItem.amount, () => {updatePantryRemovingIngredients(selectedIngredients)});
+      }
+    })
+  })
+}
+
+function updatePantryRemovingIngredients(selectedIngredients) {
+  selectedIngredients.forEach(ingredient => {
+    user.pantry.pantryIngredients.forEach(pantryItem => {
+      if (pantryItem.ingredient === ingredient) {
         pantryItem.amount = 0
       }
     })
   })
-  findPantryInfo()
+  findPantryInfo();
+  console.log("complete!")
 }
 
 function addToPantry() {
