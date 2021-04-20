@@ -69,15 +69,27 @@ let domUpdates = {
 
   unhideUnselectedRecipes(foundRecipes) {
     foundRecipes.forEach(recipe => {
-    let domRecipe = document.getElementById(`${recipe.id}`);
-    domRecipe.style.display = "block";
-  })
+      let domRecipe = document.getElementById(`${recipe.id}`);
+      domRecipe.style.display = "block";
+    })
   },
 
   showSavedRecipes(list, recipes, user) {
     let unsavedRecipes = recipes.filter(recipe => {
-      return !user[list].includes(recipe.id);
+      return !user[list].some(listItem => listItem.id === recipe.id);
+      // return !user[list].includes(recipe.id);
     });
+    unsavedRecipes.forEach(recipe => {
+      let domRecipe = document.getElementById(`${recipe.id}`);
+      domRecipe.style.display = "none";
+    });
+    domUpdates.showMyRecipesBanner();
+  },
+
+  showCookableRecipes(cookable, recipes) {
+    let unsavedRecipes = recipes.filter(recipe => {
+      return !cookable.includes(recipes);
+    })
     unsavedRecipes.forEach(recipe => {
       let domRecipe = document.getElementById(`${recipe.id}`);
       domRecipe.style.display = "none";

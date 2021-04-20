@@ -355,4 +355,6 @@ function filterMyListCookRecipesFromPantry() {
       return recipe;
     }
   })
+  console.log(cookable);
+  domUpdates.showCookableRecipes(cookable, user.recipesToCook)
 }
