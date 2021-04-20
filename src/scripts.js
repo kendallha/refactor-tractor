@@ -316,7 +316,7 @@ function updatePantryRemovingIngredients(selectedIngredients) {
 }
 
 function addToPantry() {
-  event.preventDefault(); 
+  event.preventDefault();
   const ingredientInput = pantryIngredientInput.value.toLowerCase()
   const amountInput = parseInt(pantryIngredientAmountInput.value)
   const foundIngredient = ingredientsData.find(ingredient => ingredient.name === ingredientInput)
@@ -328,6 +328,7 @@ function addToPantry() {
   if (!user.pantry.pantryIngredients.some(ingredient => ingredient.ingredient === foundIngredient.id)) {
     changePantryIngredientAmount(user.id, foundIngredient.id, amountInput, () => {updatePantryAddIngredients(foundIngredient, amountInput)})
   }
+  document.querySelector(".add-ingredients-section").reset(); 
 }
 
 function updatePantryAddQuantity(ingredient, amountInput) {
