@@ -13,7 +13,7 @@ describe('Recipe', function() {
     recipeInfo = recipeData[0];
     recipe = new Recipe(recipeInfo);
     ingredientInfo = ingredientsData;
-  })
+  });
 
   it('is a function', function() {
     expect(Recipe).to.be.a('function');
@@ -42,8 +42,8 @@ describe('Recipe', function() {
       "quantity": {
         "amount": 1.5,
         "unit": "c"
-      }
-    }
+      };
+    };
     expect(recipe.ingredients[0]).to.deep.eq(ingredient);
   });
 

@@ -6,12 +6,12 @@ class RecipeRepository {
   }
 
   filterRecipesByTag(values) {
-    return this.recipes.filter(recipe => values.every(value => recipe.tags.includes(value)))
-   }
+    return this.recipes.filter(recipe => values.every(value => recipe.tags.includes(value)));
+  }
 
   filterRecipesByIngredient(values) {
     return this.recipes.filter(recipe => values.every(value => recipe.ingredients.some(ingredient => value === ingredient.name)));
-}
+  }
 
   filterRecipesByName(name) {
     return this.recipes.filter(recipe => recipe.name.includes(name));
