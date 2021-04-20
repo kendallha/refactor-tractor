@@ -58,7 +58,7 @@ cookListButton.addEventListener("click", () => {
   domUpdates.showSavedRecipes("recipesToCook", recipeRepo.recipes, user);
 });
 searchBtn.addEventListener("click", searchRecipes);
-showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
+showPantryRecipes.addEventListener("click", filterMyListCookRecipesFromPantry);
 searchForm.addEventListener("submit", pressEnterSearch);
 addToPantryButton.addEventListener("click", addToPantry)
 removeFromPantryButton.addEventListener("click", removeFromPantry)
@@ -167,7 +167,7 @@ function openRecipeInfo(event) {
   let recipeId = event.path.find(e => e.id).id;
   let recipe = recipeRepo.recipes.find(recipe => recipe.id === Number(recipeId));
   domUpdates.generateRecipeTitle(recipe, generateIngredients(recipe), fullRecipeInfo, generateRecipeCost(recipe));
-   domUpdates.addRecipeImage(recipe);
+  domUpdates.addRecipeImage(recipe);
   domUpdates.displayRecipeInstructions(recipe, fullRecipeInfo);
 }
 
@@ -186,7 +186,7 @@ function generateRecipeCost(recipe) {
 function addRecipeToList(e) {
   const recipeId = parseInt(e.target.closest("section").id);
   const recipeToAdd = recipeRepo.recipes.find(recipe => recipe.id === recipeId);
-  user.decideToCook(recipeToAdd.id);
+  user.decideToCook(recipeToAdd);   // removed .id from recipeToAdd
 }
 
 // SEARCH RECIPES
@@ -227,23 +227,23 @@ function findPantryInfo() {
   })
 }
 
-function findCheckedPantryBoxes() {
-  let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
-  let pantryCheckboxInfo = Array.from(pantryCheckboxes)
-  // let selectedIngredients = pantryCheckboxInfo.filter(box => {
-  //   return box.checked;
-  // })
-  let selectedIngredients = [];
-  pantryCheckboxInfo.forEach(box => {
-    if (box.checked) {
-      selectedIngredients.push(box.id)
-    }
-  })
-  domUpdates.showAllRecipes(recipeRepo.recipes, );
-  if (selectedIngredients.length > 0) {
-    findRecipesWithCheckedIngredients(selectedIngredients);
-  }
-}
+// function findCheckedPantryBoxes() {
+//   let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
+//   let pantryCheckboxInfo = Array.from(pantryCheckboxes)
+//   // let selectedIngredients = pantryCheckboxInfo.filter(box => {
+//   //   return box.checked;
+//   // })
+//   let selectedIngredients = [];
+//   pantryCheckboxInfo.forEach(box => {
+//     if (box.checked) {
+//       selectedIngredients.push(box.id)
+//     }
+//   })
+//   domUpdates.showAllRecipes(recipeRepo.recipes, );
+//   if (selectedIngredients.length > 0) {
+//     findRecipesWithCheckedIngredients(selectedIngredients);
+//   }
+// }
 
 function findRecipesWithCheckedIngredients(selected) {
   let recipeChecker = (arr, target) => target.every(v => arr.includes(v));
@@ -340,13 +340,19 @@ function addToPantry() {
 }
 
 function updatePantryAddQuantity(ingredient, amountInput) {
-  console.log(ingredient);
   ingredient.amount += amountInput;
   findPantryInfo();
 }
 
 function updatePantryAddIngredients(foundIngredient, amountInput) {
-  console.log(foundIngredient);
   user.pantry.pantryIngredients.push({ingredient: foundIngredient.id, amount: amountInput})
   findPantryInfo()
+}
+
+function filterMyListCookRecipesFromPantry() {
+  const cookable = user.recipesToCook.filter(recipe => {
+    if (user.pantry.checkIngredientsMeal(recipe)) {
+      return recipe;
+    }
+  })
 }
