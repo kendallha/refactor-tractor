@@ -14,7 +14,7 @@ let domUpdates = {
    recipeRepo.recipes.forEach(recipe => {
      recipe.tags.forEach(tag => {
        if (!tags.includes(tag)) {
-         tags.push(tag); 
+         tags.push(tag);
        }
      });
    });
@@ -220,7 +220,7 @@ let domUpdates = {
     document.getElementById("cookMessage").innerHTML = ``;
   },
 
-  displayGetError(error, element) {
+  displayGetError(error, element) { 
     let errorMsg = `
       <div class="error-msg welcome-msg">
         <h1>Oh no! Something went wrong, please try again!</h1>

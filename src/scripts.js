@@ -75,20 +75,20 @@ function loadDOM([users, recipes, ingredients]) {
 //FETCH DATA FROM API
 function loadDataFromAPI() {
   const usersPromise = fetch("http://localhost:3001/api/v1/users")
-    .then(response => response.json())
+    .then(response => checkForError(response))
     .then(data => data)
 
   const recipesPromise = fetch("http://localhost:3001/api/v1/recipes")
-    .then(response => response.json())
+    .then(response => checkForError(response))
     .then(data => data)
 
   const ingredientsPromise = fetch("http://localhost:3001/api/v1/ingredients")
-    .then(response => response.json())
+    .then(response => checkForError(response))
     .then(data => data)
 
   Promise.all([usersPromise, recipesPromise, ingredientsPromise])
     .then(data => loadDOM(data))
-    .catch(error => domUpdates.displayGetError(error));
+    .catch(error => domUpdates.displayGetError(error, fullRecipeInfo));
 }
 
 // GENERATE A USER ON LOAD
@@ -111,9 +111,18 @@ function changePantryIngredientAmount(userId, ingredientId, ingredientAmount, fu
    'Content-Type': 'application/json'
     }
   })
-    .then(response => response.json())
+    .then(response => checkForError(response))
     .then(data => functionToExecute())
     .catch(error => domUpdates.displayGetError(error, fullRecipeInfo))
+}
+
+function checkForError(response) {
+  if (response.ok) {
+    return response.json();
+  } else {
+    throw new Error('Something\'s not right. Please try again!');
+    domUpdates.displayGetError(error, fullRecipeInfo);
+  }
 }
 
 // FILTER BY RECIPE TAGS
@@ -307,6 +316,7 @@ function updatePantryRemovingIngredients(selectedIngredients) {
 }
 
 function addToPantry() {
+  event.preventDefault(); 
   const ingredientInput = pantryIngredientInput.value.toLowerCase()
   const amountInput = parseInt(pantryIngredientAmountInput.value)
   const foundIngredient = ingredientsData.find(ingredient => ingredient.name === ingredientInput)

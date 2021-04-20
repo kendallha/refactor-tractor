@@ -33,11 +33,11 @@
       <ul class="pantry-list"></ul>
       <!-- <aside> -->
         <button class="add-button" id="removeFromPantry">Remove From Pantry</button>
-        <div class="add-ingredients-section">
-          <input type=text class="add-pantry" id="addIngredient" placeholder="Ingredient"></input>
-          <input type=text class="add-pantry" id="addAmount" placeholder="Amount"></input>
-          <button class="add-button" id="addToPantry">Add to Pantry</button>
-        </div>
+        <form class="add-ingredients-section">
+          <input type=text class="add-pantry" id="addIngredient" placeholder="Ingredient" required aria-required="true"/>
+          <input type=text class="add-pantry" id="addAmount" placeholder="Amount" required aria-required="true"/>
+          <input class="add-button" id="addToPantry" type="submit" value="Add to Pantry" required aria-required="true"/>
+        </form>
       <!-- </aside> -->
     </section>
     <aside>
