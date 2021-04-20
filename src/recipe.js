@@ -14,7 +14,7 @@ class Recipe {
       ingredientData.forEach(ingredient => {
         if (i.id === ingredient.id) {
           cost.push(ingredient.estimatedCostInCents * i.quantity.amount);
-        };
+        }
       });
     });
     return cost.reduce((acc, cv) => {

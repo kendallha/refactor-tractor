@@ -17,14 +17,11 @@ let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 let tagList = document.querySelector(".tag-list");
-let cookMealButton = document.querySelector("#cookMeal");
-let cookButtonWrapper = document.querySelector("#mealButtonWrapper");
 let removeFromPantryButton = document.querySelector("#removeFromPantry");
 let pantryIngredientInput = document.querySelector("#addIngredient");
 let pantryIngredientAmountInput = document.querySelector("#addAmount");
 let addToPantryButton = document.querySelector("#addToPantry");
 let menuOpen = false;
-let pantryInfo = [];
 let user;
 let ingredientsData;
 let recipeRepo;
@@ -44,7 +41,7 @@ fullRecipeInfo.addEventListener("click", (e) => {
 });
 
 allRecipesBtn.addEventListener("click", () => {
-   domUpdates.showAllRecipes(recipeRepo.recipes, fullRecipeInfo);
+  domUpdates.showAllRecipes(recipeRepo.recipes, fullRecipeInfo);
 });
 
 pantryBtn.addEventListener("click", () => {
@@ -94,7 +91,7 @@ function loadDataFromAPI() {
 
   Promise.all([usersPromise, recipesPromise, ingredientsPromise])
     .then(data => loadDOM(data))
-    .catch(error => domUpdates.displayGetError(error, fullRecipeInfo));
+    .catch(error => domUpdates.displayGetError(fullRecipeInfo));
 }
 
 // GENERATE A USER ON LOAD
@@ -113,21 +110,19 @@ function changePantryIngredientAmount(userId, ingredientId, ingredientAmount, fu
       ingredientID: ingredientId,
       ingredientModification: ingredientAmount
     }),
-    headers: {
-   'Content-Type': 'application/json'
-    }
+    headers: {'Content-Type': 'application/json'}
   })
     .then(response => checkForError(response))
     .then(data => functionToExecute())
-    .catch(error => domUpdates.displayGetError(error, fullRecipeInfo))
+    .catch(error => domUpdates.displayGetError(fullRecipeInfo))
 }
 
 function checkForError(response) {
   if (response.ok) {
     return response.json();
   } else {
+    domUpdates.displayGetError(fullRecipeInfo);
     throw new Error('Something\'s not right. Please try again!');
-    domUpdates.displayGetError(error, fullRecipeInfo);
   }
 }
 
@@ -152,7 +147,7 @@ function showFilteredRecipes() {
   recipeRepo.recipes.forEach(recipe => {
     if (selectedRecipes.length > 0 && !selectedRecipes.includes(recipe)) {
       domUpdates.hideUnselectedRecipes(recipe);
-    };
+    }
   });
 }
 
@@ -229,26 +224,12 @@ function filterNonSearched(filtered) {
 function findPantryInfo() {
   let pantryItems = [];
   user.pantry.pantryIngredients.forEach(pantryItem => {
-  	ingredientsData.forEach(ingredient => {
-  		if (ingredient.id === pantryItem.ingredient) {
-  			pantryItems.push({name: ingredient.name, id: ingredient.id, count: pantryItem.amount});
+    ingredientsData.forEach(ingredient => {
+      if (ingredient.id === pantryItem.ingredient) {
+        pantryItems.push({name: ingredient.name, id: ingredient.id, count: pantryItem.amount});
       }
     });
     domUpdates.displayPantryInfo(pantryItems.sort((a, b) => a.name.localeCompare(b.name)), pantrySection);
-  });
-}
-
-function findRecipesWithCheckedIngredients(selected) {
-  let recipeChecker = (arr, target) => target.every(v => arr.includes(v));
-  let ingredientNames = selected.map(item => item.id);
-  recipeRepo.recipes.forEach(recipe => {
-    let allRecipeIngredients = [];
-    recipe.ingredients.forEach(ingredient => {
-      allRecipeIngredients.push(ingredient.name);
-    });
-    if (!recipeChecker(allRecipeIngredients, ingredientNames)) {
-      domUpdates.hideRecipes(recipe.id);
-    };
   });
 }
 
@@ -265,7 +246,7 @@ function evaluateMeal(event) {
       });
       return `${ingredient.name} (${i.amount} ${i.unit})`
     }).join(", ");
-    domUpdates.displayMissingIngredients(ingredientList, searchBtn)
+    domUpdates.displayMissingIngredients(ingredientList)
   } else {
     removeCookingIngredients(recipeToAdd);
     domUpdates.displayCookingSuccessMessage();
@@ -276,7 +257,9 @@ function removeCookingIngredients(recipe) {
   recipe.ingredients.forEach(ingredient => {
     user.pantry.pantryIngredients.forEach(pantryItem => {
       if (ingredient.id === pantryItem.ingredient) {
-        changePantryIngredientAmount(user.id, ingredient.id, -ingredient.quantity.amount, () => {updatePantryAfterCooking(recipe)});
+        changePantryIngredientAmount(user.id, ingredient.id, -ingredient.quantity.amount, () => {
+          updatePantryAfterCooking(recipe)
+        });
       }
     })
   })
@@ -299,7 +282,9 @@ function removeFromPantry() {
   selectedIngredients.forEach(ingredient => {
     user.pantry.pantryIngredients.forEach(pantryItem => {
       if (pantryItem.ingredient === ingredient) {
-        changePantryIngredientAmount(user.id, ingredient, -pantryItem.amount, () => {updatePantryRemovingIngredients(selectedIngredients)});
+        changePantryIngredientAmount(user.id, ingredient, -pantryItem.amount, () => {
+          updatePantryRemovingIngredients(selectedIngredients)
+        });
       }
     })
   })
@@ -323,11 +308,15 @@ function addToPantry() {
   const foundIngredient = ingredientsData.find(ingredient => ingredient.name === ingredientInput);
   user.pantry.pantryIngredients.forEach(ingredient => {
     if (ingredient.ingredient === foundIngredient.id) {
-      changePantryIngredientAmount(user.id, ingredient.ingredient, amountInput, () => {updatePantryAddQuantity(ingredient, amountInput)});
+      changePantryIngredientAmount(user.id, ingredient.ingredient, amountInput, () => {
+        updatePantryAddQuantity(ingredient, amountInput)
+      });
     }
   })
   if (!user.pantry.pantryIngredients.some(ingredient => ingredient.ingredient === foundIngredient.id)) {
-    changePantryIngredientAmount(user.id, foundIngredient.id, amountInput, () => {updatePantryAddIngredients(foundIngredient, amountInput)});
+    changePantryIngredientAmount(user.id, foundIngredient.id, amountInput, () => {
+      updatePantryAddIngredients(foundIngredient, amountInput)
+    });
   }
   document.querySelector(".add-ingredients-section").reset();
 }
@@ -346,7 +335,7 @@ function filterMyListCookRecipesFromPantry() {
   const cookable = user.recipesToCook.filter(recipe => {
     if (user.pantry.checkIngredientsMeal(recipe)) {
       return recipe;
-    };
+    }
   });
   domUpdates.showCookableRecipes(cookable, user.recipesToCook);
 }

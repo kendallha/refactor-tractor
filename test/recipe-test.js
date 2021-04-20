@@ -42,7 +42,7 @@ describe('Recipe', function() {
       "quantity": {
         "amount": 1.5,
         "unit": "c"
-      };
+      }
     };
     expect(recipe.ingredients[0]).to.deep.eq(ingredient);
   });

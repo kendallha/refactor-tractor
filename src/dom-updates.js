@@ -22,13 +22,13 @@ let domUpdates = {
     domUpdates.listTags(tags, element);
   },
 
- createCards(recipeRepo, element) {
-  recipeRepo.recipes.forEach(recipe => {
-    let recipeName = recipe.name;
-    if (recipe.name.length > 40) {
-      recipeName = recipe.name.substring(0, 40) + "...";
-    }
-    domUpdates.addToDom(recipe, recipeName, element)
+  createCards(recipeRepo, element) {
+    recipeRepo.recipes.forEach(recipe => {
+      let recipeName = recipe.name;
+      if (recipe.name.length > 40) {
+        recipeName = recipe.name.substring(0, 40) + "...";
+      }
+      domUpdates.addToDom(recipe, recipeName, element);
     });
   },
 
@@ -63,8 +63,8 @@ let domUpdates = {
   },
 
   hideUnselectedRecipes(foundRecipes) {
-      let domRecipe = document.getElementById(`${foundRecipes.id}`);
-      domRecipe.style.display = "none";
+    let domRecipe = document.getElementById(`${foundRecipes.id}`);
+    domRecipe.style.display = "none";
   },
 
   unhideUnselectedRecipes(foundRecipes) {
@@ -126,11 +126,13 @@ let domUpdates = {
   exitRecipe(element) {
     while (element.firstChild && element.removeChild(element.firstChild));
     element.style.display = "none";
-    element.innerHTML = `
+    element.innerHTML =
+    `
       <div id="mealButtonWrapper">
         <button class="add-button" id="addToList">Add to List to Cook</button>
         <button class="add-button" id="cookMeal">Cook this Meal</button>
-      </div>`;
+      </div>
+    `;
   },
 
   toggleMenu(menuOpen) {
@@ -139,7 +141,7 @@ let domUpdates = {
       menuDropdown.style.display = "block";
     } else {
       menuDropdown.style.display = "none";
-    };
+    }
   },
 
   isDescendant(parent, child) {
@@ -193,7 +195,7 @@ let domUpdates = {
       <ol>${instructionsList}</ol>`;
   },
 
-  displayMissingIngredients(missingIngredients, element) {
+  displayMissingIngredients(missingIngredients) {
     const missingIngredientMessage =
     `
       <div id="cookMessage">
@@ -220,7 +222,7 @@ let domUpdates = {
     document.getElementById("cookMessage").innerHTML = ``;
   },
 
-  displayGetError(error, element) {
+  displayGetError(element) {
     let errorMsg =
     `
       <div class="error-msg welcome-msg">
