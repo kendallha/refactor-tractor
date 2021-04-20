@@ -46,11 +46,19 @@ For this project, our team refactored an existing application with a focus on im
 
 # App Main Page
 
+<img src="https://user-images.githubusercontent.com/25498241/115470031-86bec300-a1ea-11eb-922f-66b4e56693d8.png" width="500">
+
 # Viewing Recipe Information
 
-# Filtering By Tag
+<img src="https://user-images.githubusercontent.com/25498241/115470270-e917c380-a1ea-11eb-937d-df0aa34e52d5.png" width="500">
+
+# Searching Recipes by Ingredient
+
+<img src="https://user-images.githubusercontent.com/25498241/115470162-bcfc4280-a1ea-11eb-877a-fdcd8d38b682.png" width="500">
 
 # User's Pantry
+
+<img src="https://user-images.githubusercontent.com/25498241/115470103-a6ee8200-a1ea-11eb-8d40-a68ec6168f18.png" height="250">
 
 ## Technologies Used
 
