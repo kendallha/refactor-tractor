@@ -69,15 +69,26 @@ let domUpdates = {
 
   unhideUnselectedRecipes(foundRecipes) {
     foundRecipes.forEach(recipe => {
-    let domRecipe = document.getElementById(`${recipe.id}`);
-    domRecipe.style.display = "block";
-  })
+      let domRecipe = document.getElementById(`${recipe.id}`);
+      domRecipe.style.display = "block";
+    })
   },
 
   showSavedRecipes(list, recipes, user) {
     let unsavedRecipes = recipes.filter(recipe => {
-      return !user[list].includes(recipe.id);
+      return !user[list].some(listItem => listItem.id === recipe.id);
     });
+    unsavedRecipes.forEach(recipe => {
+      let domRecipe = document.getElementById(`${recipe.id}`);
+      domRecipe.style.display = "none";
+    });
+    domUpdates.showMyRecipesBanner();
+  },
+
+  showCookableRecipes(cookable, recipes) {
+    let unsavedRecipes = recipes.filter(recipe => {
+      return !cookable.includes(recipes);
+    })
     unsavedRecipes.forEach(recipe => {
       let domRecipe = document.getElementById(`${recipe.id}`);
       domRecipe.style.display = "none";
@@ -117,12 +128,11 @@ let domUpdates = {
       element.removeChild(element.firstChild));
     element.style.display = "none";
     element.innerHTML = `
-    <div id="mealButtonWrapper">
-      <button class="add-button" id="addToList">Add to List to Cook</button>
-      <button class="add-button" id="cookMeal">Cook this Meal</button>
-    </div>
-  `
-    // document.getElementById("overlay").remove();
+      <div id="mealButtonWrapper">
+        <button class="add-button" id="addToList">Add to List to Cook</button>
+        <button class="add-button" id="cookMeal">Cook this Meal</button>
+      </div>
+    `
   },
 
   toggleMenu(menuOpen) {
@@ -170,7 +180,6 @@ let domUpdates = {
 
   displayRecipeInfo(element) {
     element.insertAdjacentHTML("beforebegin", "<section id='overlay'></section>");
-    // element.setAttribute('id','overlay');
   },
 
   displayRecipeInstructions(recipe, element) {
@@ -220,18 +229,6 @@ let domUpdates = {
       errorMsg);
     element.style.display = "none";
   },
-
-  displayCookErrorMsg() {
-    const errorMessage =
-    `<div id="cookMessage">
-        <h4>Sorry, we were unable to update your pantry!</h4>
-        <button class="add-button" id="okButton">Clear Message</button>
-      </div>
-    `
-    document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${errorMessage}`)
-  }
-
-
 }
 
 export default domUpdates;
