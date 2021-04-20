@@ -60,6 +60,7 @@ For this project, our team refactored an existing application with a focus on im
 - Vanilla Javascript
 - HTML
 - SCSS
+- Node servers
 
 
 
