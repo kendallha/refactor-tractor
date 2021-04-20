@@ -35,7 +35,7 @@ describe('Pantry', function() {
   });
 
   it('should return an array of missing ingredients for recipe', function() {
-    expect(pantry.findMissingIngredientsMeal(recipe.recipes[2])).to.deep.eq([{ingredient: "blueberries", amount: 1.5}])
+    expect(pantry.findMissingIngredientsMeal(recipe.recipes[2])).to.deep.eq([{amount: 1.5, ingredient: 123584, unit: "cups"}])
   });
 
   it('should decrease ingredients if used in recipe', function() {
