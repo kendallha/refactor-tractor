@@ -112,7 +112,6 @@ function changePantryIngredientAmount(userId, ingredientId, ingredientAmount, fu
     }
   })
     .then(response => response.json())
-    .then(data => console.log("post finished"))
     .then(data => functionToExecute())
     .catch(error => domUpdates.displayGetError(error, fullRecipeInfo))
 }
@@ -227,24 +226,6 @@ function findPantryInfo() {
   })
 }
 
-// function findCheckedPantryBoxes() {
-//   let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
-//   let pantryCheckboxInfo = Array.from(pantryCheckboxes)
-//   // let selectedIngredients = pantryCheckboxInfo.filter(box => {
-//   //   return box.checked;
-//   // })
-//   let selectedIngredients = [];
-//   pantryCheckboxInfo.forEach(box => {
-//     if (box.checked) {
-//       selectedIngredients.push(box.id)
-//     }
-//   })
-//   domUpdates.showAllRecipes(recipeRepo.recipes, );
-//   if (selectedIngredients.length > 0) {
-//     findRecipesWithCheckedIngredients(selectedIngredients);
-//   }
-// }
-
 function findRecipesWithCheckedIngredients(selected) {
   let recipeChecker = (arr, target) => target.every(v => arr.includes(v));
   let ingredientNames = selected.map(item => {
@@ -355,6 +336,5 @@ function filterMyListCookRecipesFromPantry() {
       return recipe;
     }
   })
-  console.log(cookable);
   domUpdates.showCookableRecipes(cookable, user.recipesToCook)
 }
