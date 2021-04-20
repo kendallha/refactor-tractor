@@ -14,7 +14,7 @@ let domUpdates = {
    recipeRepo.recipes.forEach(recipe => {
      recipe.tags.forEach(tag => {
        if (!tags.includes(tag)) {
-         tags.push(tag);
+         tags.push(tag); 
        }
      });
    });
