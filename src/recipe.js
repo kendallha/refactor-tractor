@@ -5,7 +5,7 @@ class Recipe {
     this.image = recipe.image;
     this.tags = recipe.tags;
     this.ingredients = recipe.ingredients;
-    this.instructions = recipe.instructions
+    this.instructions = recipe.instructions;
   }
 
   calculateIngredientsCost(ingredientData) {
@@ -13,10 +13,10 @@ class Recipe {
     this.ingredients.forEach(i => {
       ingredientData.forEach(ingredient => {
         if (i.id === ingredient.id) {
-          cost.push(ingredient.estimatedCostInCents * i.quantity.amount)
+          cost.push(ingredient.estimatedCostInCents * i.quantity.amount);
         }
-      })
-    })
+      });
+    });
     return cost.reduce((acc, cv) => {
       acc += cv;
       return acc;
@@ -26,8 +26,8 @@ class Recipe {
   findAllIngredientNames() {
     return this.ingredients.map(ingredient => {
       return ingredient.name;
-    })
-  };
+    });
+  }
 
   returnRecipeInstructions() {
     return this.instructions;

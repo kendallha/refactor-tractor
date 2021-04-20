@@ -7,7 +7,8 @@ class Pantry {
     return recipe.ingredients.every(ingredient =>
       this.pantryIngredients.some(pantryItem => {
         return (pantryItem.ingredient === ingredient.id) && (pantryItem.amount >= ingredient.quantity.amount)
-      }))
+      })
+    )
   }
 
   findMissingIngredientsMeal(recipe) {
@@ -17,24 +18,24 @@ class Pantry {
         missingItems.push({ingredient: ingredient.id, amount: ingredient.quantity.amount, unit: ingredient.quantity.unit});
       }
       this.pantryIngredients.forEach(pantryItem => {
-        if ((pantryItem.ingredient === ingredient.id) && (pantryItem.amount < ingredient.quantity.amount))
-        missingItems.push({ingredient: ingredient.id, amount: ingredient.quantity.amount - pantryItem.amount, unit: ingredient.quantity.unit})
-      }
-    )})
+        if ((pantryItem.ingredient === ingredient.id) && (pantryItem.amount < ingredient.quantity.amount)) {
+          missingItems.push({ingredient: ingredient.id, amount: ingredient.quantity.amount - pantryItem.amount, unit: ingredient.quantity.unit})
+        }
+      });
+    });
     return missingItems;
   }
 
 
   useIngredientsCookMeal(recipe) {
     if (this.checkIngredientsMeal(recipe)) {
-     recipe.ingredients.forEach(ingredient => {
-        this.pantryIngredients.forEach((pantryItem => {
+      recipe.ingredients.forEach(ingredient => {
+        this.pantryIngredients.forEach(pantryItem => {
           if (pantryItem.ingredient === ingredient.id) {
             pantryItem.amount = pantryItem.amount - ingredient.quantity.amount
           }
-
-        } ))
-      })
+        });
+      });
     }
   }
 }

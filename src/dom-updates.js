@@ -11,26 +11,26 @@ let domUpdates = {
 
   displayTags(recipeRepo, element) {
     let tags = [];
-   recipeRepo.recipes.forEach(recipe => {
-     recipe.tags.forEach(tag => {
-       if (!tags.includes(tag)) {
-         tags.push(tag); 
-       }
-     });
-   });
-   tags.sort();
-   domUpdates.listTags(tags, element);
- },
+    recipeRepo.recipes.forEach(recipe => {
+      recipe.tags.forEach(tag => {
+        if (!tags.includes(tag)) {
+          tags.push(tag);
+        }
+      });
+    });
+    tags.sort();
+    domUpdates.listTags(tags, element);
+  },
 
- createCards(recipeRepo, element) {
-  recipeRepo.recipes.forEach(recipe => {
-    let recipeName = recipe.name;
-  if (recipe.name.length > 40) {
-    recipeName = recipe.name.substring(0, 40) + "...";
-  }
-  domUpdates.addToDom(recipe, recipeName, element)
-});
-},
+  createCards(recipeRepo, element) {
+    recipeRepo.recipes.forEach(recipe => {
+      let recipeName = recipe.name;
+      if (recipe.name.length > 40) {
+        recipeName = recipe.name.substring(0, 40) + "...";
+      }
+      domUpdates.addToDom(recipe, recipeName, element);
+    });
+  },
 
   addToDom(recipeInfo, shortRecipeName, element) {
     let cardHtml = `
@@ -63,15 +63,15 @@ let domUpdates = {
   },
 
   hideUnselectedRecipes(foundRecipes) {
-      let domRecipe = document.getElementById(`${foundRecipes.id}`);
-      domRecipe.style.display = "none";
+    let domRecipe = document.getElementById(`${foundRecipes.id}`);
+    domRecipe.style.display = "none";
   },
 
   unhideUnselectedRecipes(foundRecipes) {
     foundRecipes.forEach(recipe => {
       let domRecipe = document.getElementById(`${recipe.id}`);
       domRecipe.style.display = "block";
-    })
+    });
   },
 
   showSavedRecipes(list, recipes, user) {
@@ -88,7 +88,7 @@ let domUpdates = {
   showCookableRecipes(cookable, recipes) {
     let unsavedRecipes = recipes.filter(recipe => {
       return !cookable.includes(recipes);
-    })
+    });
     unsavedRecipes.forEach(recipe => {
       let domRecipe = document.getElementById(`${recipe.id}`);
       domRecipe.style.display = "none";
@@ -99,13 +99,13 @@ let domUpdates = {
 
   generateRecipeTitle(recipe, ingredients, element, cost) {
     element.id = `${recipe.id}`;
-    element.insertAdjacentHTML('afterbegin', '<button id="exit-recipe-btn">X</button>')
+    element.insertAdjacentHTML('afterbegin', '<button id="exit-recipe-btn">X</button>');
     let recipeTitle = `
       <h3 class ="recipe-title" id="recipe-title">${recipe.name}</h3>
       <h4 class="ingredients-label">Ingredients</h4>
       <p>${ingredients}</p>
       <h4>Cost</h4>
-      <p>${cost}<p>`
+      <p>${cost}<p>`;
     element.innerHTML += recipeTitle;
   },
 
@@ -124,15 +124,15 @@ let domUpdates = {
   },
 
   exitRecipe(element) {
-    while (element.firstChild &&
-      element.removeChild(element.firstChild));
+    while (element.firstChild && element.removeChild(element.firstChild));
     element.style.display = "none";
-    element.innerHTML = `
+    element.innerHTML =
+    `
       <div id="mealButtonWrapper">
         <button class="add-button" id="addToList">Add to List to Cook</button>
         <button class="add-button" id="cookMeal">Cook this Meal</button>
       </div>
-    `
+    `;
   },
 
   toggleMenu(menuOpen) {
@@ -170,9 +170,10 @@ let domUpdates = {
   },
 
   displayPantryInfo(pantry, element) {
-    element.innerHTML = ''
+    element.innerHTML = '';
     pantry.forEach(ingredient => {
-      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" role="checkbox" id="${ingredient.id}">
+      let ingredientHtml = `
+        <li><input type="checkbox" class="pantry-checkbox" role="checkbox" id="${ingredient.id}">
         <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
       element.innerHTML += ingredientHtml;
     });
@@ -185,16 +186,16 @@ let domUpdates = {
   displayRecipeInstructions(recipe, element) {
     let instructionsList = "";
     let instructions = recipe.instructions.map(i => {
-      return i.instruction
+      return i.instruction;
     });
     instructions.forEach(i => {
-      instructionsList += `<li>${i}</li>`
+      instructionsList += `<li>${i}</li>`;
     });
     element.innerHTML += `<h4>Instructions</h4>
-      <ol>${instructionsList}</ol>`
+      <ol>${instructionsList}</ol>`;
   },
 
-  displayMissingIngredients(missingIngredients, element) {
+  displayMissingIngredients(missingIngredients) {
     const missingIngredientMessage =
     `
       <div id="cookMessage">
@@ -202,31 +203,33 @@ let domUpdates = {
         <p>${missingIngredients}</p>
         <button class="add-button" id="okButton">Clear Message</button>
        </div>
-    `
-    document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${missingIngredientMessage}`)
+    `;
+    document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${missingIngredientMessage}`);
   },
 
   displayCookingSuccessMessage() {
     const successMessage =
-    `<div id="cookMessage">
+    `
+      <div id="cookMessage">
         <h4>You cooked this meal! The items have been removed from your pantry.</h4>
         <button class="add-button" id="okButton">Clear Message</button>
       </div>
-    `
-    document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${successMessage}`)
+    `;
+    document.getElementById("mealButtonWrapper").insertAdjacentHTML('afterend', `${successMessage}`);
   },
 
   closeCookMealMessage() {
     document.getElementById("cookMessage").innerHTML = ``;
   },
 
-  displayGetError(error, element) {
-    let errorMsg = `
+  displayGetError(element) {
+    let errorMsg =
+    `
       <div class="error-msg welcome-msg">
         <h1>Oh no! Something went wrong, please try again!</h1>
-      </div>`;
-    document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
-      errorMsg);
+      </div>
+    `;
+    document.querySelector(".banner-image").insertAdjacentHTML("afterbegin", errorMsg);
     element.style.display = "none";
   },
 }

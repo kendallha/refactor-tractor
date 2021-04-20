@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>Fresh Picks</title>
-    <!-- <link rel="stylesheet" type="text/css" href="../styles.scss"> -->
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Sulphur+Point:400,700&display=swap" rel="stylesheet">
     <link rel="icon" href="../images/apple-logo.png" />
@@ -31,14 +30,12 @@
       <h2>My Pantry</h2>
       <button class="show-pantry-recipes-btn">What Can I Make?</button>
       <ul class="pantry-list"></ul>
-      <!-- <aside> -->
-        <button class="add-button" id="removeFromPantry">Remove From Pantry</button>
-        <div class="add-ingredients-section">
-          <input type=text class="add-pantry" id="addIngredient" placeholder="Ingredient"></input>
-          <input type=text class="add-pantry" id="addAmount" placeholder="Amount"></input>
-          <button class="add-button" id="addToPantry">Add to Pantry</button>
-        </div>
-      <!-- </aside> -->
+      <button class="add-button" id="removeFromPantry">Remove From Pantry</button>
+      <form class="add-ingredients-section">
+        <input type=text class="add-pantry" id="addIngredient" placeholder="Ingredient" required aria-required="true"/>
+        <input type=text class="add-pantry" id="addAmount" placeholder="Amount" required aria-required="true"/>
+        <input class="add-button" id="addToPantry" type="submit" value="Add to Pantry" required aria-required="true"/>
+      </form>
     </section>
     <aside>
       <div class="wrap">
